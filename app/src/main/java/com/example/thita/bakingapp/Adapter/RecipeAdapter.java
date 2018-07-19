@@ -18,6 +18,12 @@ public class RecipeAdapter extends ArrayAdapter {
     public List<Recipe> recipeList = new ArrayList<>();
     private Context mContext;
     private int mResourceId;
+
+    private static class ViewHolder {
+        ImageView image;
+        TextView  title;
+    }
+
     public RecipeAdapter(List<Recipe> data, int resourceId , Context context){
         super(context, resourceId, data);
         recipeList = data;
@@ -25,16 +31,11 @@ public class RecipeAdapter extends ArrayAdapter {
         mResourceId = resourceId;
     }
 
-    static class ViewHolder {
-        ImageView image;
-        TextView  title;
-    }
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Recipe recipetarger = (Recipe) getItem(position);
         ViewHolder myViewHolder = null;
-    //TODO continue
+
         if (convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_item_recipe,parent,false);
             myViewHolder = new ViewHolder();
@@ -46,10 +47,18 @@ public class RecipeAdapter extends ArrayAdapter {
         }
 
         myViewHolder.image.setImageResource(R.drawable.ic_chesscake);
+        final int id = recipetarger.getId();
+        if (id == 1 ){
+            myViewHolder.image.setImageResource(R.drawable.ic_nutella_pie);
+        }else if (id == 2){
+            myViewHolder.image.setImageResource(R.drawable.ic_brownies);
+        }else if (id == 3){
+            myViewHolder.image.setImageResource(R.drawable.ic_yollow_cake);
+        }else if (id == 4){
+            myViewHolder.image.setImageResource(R.drawable.ic_chesscake);
+        }
         myViewHolder.title.setText(recipetarger.getName());
-
         return convertView;
-
     }
 }
 
