@@ -42,36 +42,12 @@ public class RecipeMenuFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_main_menu, container,false);
         final ListView listView = rootView.findViewById(R.id.lv_menu_fragment);
 
-        RecipeService recipyService = RecipeApi.getApi().create(RecipeService.class);
-        final Call<List<Recipe>> mCall = recipyService.loadAllRecipeFromServer();
-        mCall.enqueue(new Callback<List<Recipe>>() {
-            @Override
-            public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
-//                recipeList.clear();
-                recipeList = response.body();
-                Log.d("Menu #1 : ", recipeList.get(0).getName());
-                Log.d("Menu #2 : ", recipeList.get(1).getName());
-                Log.d("Menu #3 : ", recipeList.get(2).getName());
-                Log.d("Menu #4 : ", recipeList.get(3).getName());
-                Log.d("Fragment", "Retrofit callBack success & built adapter : of size " + recipeList.size());
-                recipeAdapter = new RecipeAdapter(recipeList, R.layout.row_item_recipe, getContext());
-                listView.setAdapter(recipeAdapter);
-                recipeAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<List<Recipe>> call, Throwable t) {
-                Log.d(tag, "Fail callBack success");
-            }
-        });
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getContext(), "Item is clicked at position " + position, Toast.LENGTH_SHORT).show();
-                Recipe recipeSelected = (Recipe) parent.getItemAtPosition(position);
-                // TODO (2) pass data to RecipeDetailActivity
-            }
-        });
+        Bundle args = getArguments();
+        recipeList = args.getParcelableArrayList(RecipeActivity.RECIPE_LIST_EXTRA);
+        Log.d(tag,"Size is : ...." + recipeList.isEmpty());
+        recipeAdapter = new RecipeAdapter(recipeList, R.layout.row_item_recipe, getContext());
+        listView.setAdapter(recipeAdapter);
+        recipeAdapter.notifyDataSetChanged();
 
         return  rootView;
     }
@@ -80,9 +56,7 @@ public class RecipeMenuFragment extends Fragment {
         this.recipeList = recipeList;
     }
 
-    public List<Recipe> getRecipeList(){
-        return recipeList;
-    }
+
 
 
 
