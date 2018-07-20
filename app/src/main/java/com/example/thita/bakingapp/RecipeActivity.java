@@ -1,5 +1,6 @@
 package com.example.thita.bakingapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import com.example.thita.bakingapp.Adapter.RecipeAdapter;
 import com.example.thita.bakingapp.Data.RecipeApi;
 import com.example.thita.bakingapp.Data.RecipeService;
+import com.example.thita.bakingapp.Model.Ingredient;
 import com.example.thita.bakingapp.Model.Recipe;
 
 import java.util.ArrayList;
@@ -24,34 +26,31 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RecipeActivity extends AppCompatActivity {
+public class RecipeActivity extends AppCompatActivity implements RecipeMenuFragment.RecipeMenuFragListener {
 
 
     public List<Recipe> mRecipeList = new ArrayList<>();
     public static final String RECIPE_LIST_EXTRA = "RECIPE_EXTRA";
     public static final String tag = RecipeActivity.class.getSimpleName();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
 
-        loadDataAPI();
 
-        //TODO (1) if configuration change call beginTransaction.replace
         if (getSupportFragmentManager().getFragments().isEmpty() ) {
 
-//            Bundle args = new Bundle();
-//            args.putParcelableArrayList(RECIPE_LIST_EXTRA, (ArrayList<? extends Parcelable>) mRecipeList);
-//            Log.d(tag, mRecipeList.size()+" SIZE pass");
-
             RecipeMenuFragment menuFragment = new RecipeMenuFragment();
-//            menuFragment.setArguments(args);
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .add(R.id.menu_container, menuFragment).commit();
 
         }
+
+        loadDataAPI();
+        //TODO 2 launch RecipeDetail after user click on menu
 
 
 //            mRecipeList = menuFragment.getRecipeList();
@@ -79,12 +78,21 @@ public class RecipeActivity extends AppCompatActivity {
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.menu_container, menuFragment).commit();
 
+
             }
             @Override
             public void onFailure(Call<List<Recipe>> call, Throwable t) {
                 Log.d(tag, "Fail callBack success");
             }
         });
+    }
+
+    @Override
+    public void recipeItemClick(Recipe recipeClicked) {
+        RecipeMenuFragment menuFrag = (RecipeMenuFragment) getSupportFragmentManager().findFragmentById(R.id.recipe_name_menu);
+        if (recipeClicked != null){
+            Toast.makeText(this, "Recipe selected name : " + recipeClicked.getName(),Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
