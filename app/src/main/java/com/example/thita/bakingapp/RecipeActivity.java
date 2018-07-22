@@ -30,7 +30,8 @@ public class RecipeActivity extends AppCompatActivity implements RecipeMenuFragm
 
 
     public List<Recipe> mRecipeList = new ArrayList<>();
-    public static final String RECIPE_LIST_EXTRA = "RECIPE_EXTRA";
+    public static final String RECIPE_LIST_EXTRA = "RECIPE_LIST_EXTRA";
+    public static final String RECIPE_EXTRA = "RECIPE_EXTRA";
     public static final String tag = RecipeActivity.class.getSimpleName();
 
 
@@ -46,7 +47,6 @@ public class RecipeActivity extends AppCompatActivity implements RecipeMenuFragm
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .add(R.id.menu_container, menuFragment).commit();
-
         }
 
         loadDataAPI();
@@ -71,13 +71,13 @@ public class RecipeActivity extends AppCompatActivity implements RecipeMenuFragm
                 Log.d("Menu #4 : ", mRecipeList.get(3).getName());
                 Log.d("Fragment", "Retrofit callBack success & built adapter : of size " + mRecipeList.size());
 
+
                 RecipeMenuFragment menuFragment = new RecipeMenuFragment();
                 Bundle args = new Bundle();
                 args.putParcelableArrayList(RECIPE_LIST_EXTRA, (ArrayList<? extends Parcelable>) mRecipeList);
                 menuFragment.setArguments(args);
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.menu_container, menuFragment).commit();
-
 
             }
             @Override
@@ -89,9 +89,12 @@ public class RecipeActivity extends AppCompatActivity implements RecipeMenuFragm
 
     @Override
     public void recipeItemClick(Recipe recipeClicked) {
-        RecipeMenuFragment menuFrag = (RecipeMenuFragment) getSupportFragmentManager().findFragmentById(R.id.recipe_name_menu);
+//        RecipeMenuFragment menuFrag = (RecipeMenuFragment) getSupportFragmentManager().findFragmentById(R.id.recipe_name_menu);
         if (recipeClicked != null){
             Toast.makeText(this, "Recipe selected name : " + recipeClicked.getName(),Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(getApplicationContext(), RecipeDetailActivity.class);
+            intent.putExtra(RECIPE_EXTRA, recipeClicked);
+            startActivity(intent);
         }
     }
 

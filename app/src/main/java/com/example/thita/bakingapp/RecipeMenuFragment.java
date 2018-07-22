@@ -62,9 +62,9 @@ public class RecipeMenuFragment extends Fragment {
             public void onItemClick(@NonNull AdapterView<?> parent,@NonNull View view, int position, long id) {
                 Toast.makeText(getContext(), "Clicked at position " + position, Toast.LENGTH_LONG).show();
                 Recipe recipeSelect = (Recipe) parent.getItemAtPosition(position);
-                if (mCallback == null){
-                    // TODO 1 pass the recipeSelect  get error it might be null
+                if (mCallback != null){
                     mCallback.recipeItemClick(recipeSelect);
+                    Log.d(tag, "mCallback pass data");
                 }else{
                     throw new UnsupportedOperationException(
                             "Callback is currently null, this exception should not have occurred."

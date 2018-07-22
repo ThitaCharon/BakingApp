@@ -3,8 +3,8 @@ package com.example.thita.bakingapp.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Step implements Parcelable {
 
+public class Step implements Parcelable {
     private int id;
     private String shortDescription;
     private String description;
@@ -15,7 +15,7 @@ public class Step implements Parcelable {
     }
 
     protected Step(Parcel in) {
-        id = in.readInt();
+        id = (Integer) in.readValue(Integer.class.getClassLoader());
         shortDescription = in.readString();
         description = in.readString();
         videoURL = in.readString();
@@ -36,7 +36,7 @@ public class Step implements Parcelable {
         return 0;
     }
 
-    public static final Creator<Step> CREATOR = new Creator<Step>() {
+    public static final Parcelable.Creator<Step> CREATOR = new Creator<Step>() {
         @Override
         public Step createFromParcel(Parcel in) {
             return new Step(in);
@@ -53,9 +53,7 @@ public class Step implements Parcelable {
         return id;
     }
 
-    public String getShortDescription() {
-        return shortDescription;
-    }
+    public String getShortDescription() { return shortDescription; }
 
     public String getDescription() {
         return description;
