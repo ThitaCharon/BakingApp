@@ -17,9 +17,11 @@ import java.util.List;
 
 public class RecipeDetailActivity extends AppCompatActivity {
 
-    private Recipe recipe;
+    private Recipe recipe ;
     private android.support.v4.app.FragmentManager mFragmentManager;
     public ArrayList<String> overviewList = new ArrayList<>();
+    public List<Step> stepsList;
+    public List<Ingredient> ingredientList;
     public static final String RECIPE_OVERVIEW_LIST_EXTRA = "OVERVIEW_EXTRA";
 
     @Override
@@ -27,18 +29,20 @@ public class RecipeDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_activity_recipe_overview);
         if (savedInstanceState == null){
-            Intent targetIntent = getIntent();
-            recipe = targetIntent.getParcelableExtra(RecipeActivity.RECIPE_EXTRA);
-            setTitle(recipe.getName());
-            ArrayList<String> overviewList = recipe.getRecipeOverview();
-            overviewList.add("Next step");
-            //TODO get steplist decription and add to overviewList but step list always return 0
-            List<Step> stepList = recipe.getStepsList();
-            List<Ingredient> ingredientList = recipe.getIngredientsList();
-            Log.d("StepList", stepList.size() + "" );
-            Log.d("ingredientList", ingredientList.size() + "" );
 
-            // pass data to fragment using Bundle
+            Intent intent = getIntent();
+            if (intent != null ) {
+                // TODO try to get recipe target
+                recipe = intent.getExtras(RecipeActivity.RECIPE_EXTRA);
+
+                stepsList = intent.getParcelableArrayListExtra(RecipeActivity.STEP_LIST_EXTRA);
+                ingredientList = intent.getParcelableArrayListExtra(RecipeActivity.INGREDIENT_LIST_EXTRA);
+                for (int i = 0; i < stepsList.size(); i++) {
+                    overviewList.add(stepsList.get(i).getShortDescription());
+                }
+                setTitle(recipe.getName());
+
+            }
             Bundle args = new Bundle();
             args.putStringArrayList(RECIPE_OVERVIEW_LIST_EXTRA, overviewList);
             RecipeOverviewFragment overviewFragment = new RecipeOverviewFragment();

@@ -17,6 +17,7 @@ import com.example.thita.bakingapp.Data.RecipeApi;
 import com.example.thita.bakingapp.Data.RecipeService;
 import com.example.thita.bakingapp.Model.Ingredient;
 import com.example.thita.bakingapp.Model.Recipe;
+import com.example.thita.bakingapp.Model.Step;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,8 @@ public class RecipeActivity extends AppCompatActivity implements RecipeMenuFragm
     public List<Recipe> mRecipeList = new ArrayList<>();
     public static final String RECIPE_LIST_EXTRA = "RECIPE_LIST_EXTRA";
     public static final String RECIPE_EXTRA = "RECIPE_EXTRA";
+    public static final String STEP_LIST_EXTRA = "STEP_LIST_EXTRA";
+    public static final String INGREDIENT_LIST_EXTRA = "RECIPE_LIST_EXTRA";
     public static final String tag = RecipeActivity.class.getSimpleName();
 
 
@@ -91,9 +94,13 @@ public class RecipeActivity extends AppCompatActivity implements RecipeMenuFragm
     public void recipeItemClick(Recipe recipeClicked) {
 //        RecipeMenuFragment menuFrag = (RecipeMenuFragment) getSupportFragmentManager().findFragmentById(R.id.recipe_name_menu);
         if (recipeClicked != null){
+            List<Step> stepList = recipeClicked.getStepsList();
+            List<Ingredient> ingredientList = recipeClicked.getIngredientsList();
             Toast.makeText(this, "Recipe selected name : " + recipeClicked.getName(),Toast.LENGTH_LONG).show();
             Intent intent = new Intent(getApplicationContext(), RecipeDetailActivity.class);
             intent.putExtra(RECIPE_EXTRA, recipeClicked);
+            intent.putParcelableArrayListExtra(INGREDIENT_LIST_EXTRA, (ArrayList<? extends Parcelable>) ingredientList);
+            intent.putParcelableArrayListExtra(STEP_LIST_EXTRA, (ArrayList<? extends Parcelable>) stepList);
             startActivity(intent);
         }
     }
