@@ -101,12 +101,9 @@ public class Recipe implements Parcelable {
     public ArrayList<String> getRecipeOverview(){
         ArrayList<String> overview = new ArrayList<>();
         overview.add(name + " Ingredients");
-        for (int i = 0; i < stepsList.size(); i++){
+        for (int i = 0; i < this.stepsList.size(); i++){
             overview.add(stepsList.get(i).getShortDescription());
         }
-//        for (int i = 0; i < ingredientsList.size(); i++){
-//            overview.add(ingredientsList.get(i).getIngredient());
-//        }
         return overview;
     }
 

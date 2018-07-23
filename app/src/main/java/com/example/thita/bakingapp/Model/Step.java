@@ -15,7 +15,7 @@ public class Step implements Parcelable {
     }
 
     protected Step(Parcel in) {
-        id = (Integer) in.readValue(Integer.class.getClassLoader());
+        id = in.readInt();
         shortDescription = in.readString();
         description = in.readString();
         videoURL = in.readString();

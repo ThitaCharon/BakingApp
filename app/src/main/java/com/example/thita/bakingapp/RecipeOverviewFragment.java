@@ -35,8 +35,8 @@ public class RecipeOverviewFragment extends Fragment {
 
         if (saveInstanceState != null){
             overviewList = saveInstanceState.getStringArrayList(OVERVIEW_LIST_EXTRA);
-        }else if( getArguments() != null && getArguments().containsKey(RecipeDetailActivity.RECIPE_OVERVIEW_LIST_EXTRA)) {
-            overviewList = getArguments().getStringArrayList(RecipeDetailActivity.RECIPE_OVERVIEW_LIST_EXTRA);
+        }else if( getArguments() != null && getArguments().containsKey(RecipeDetailActivity.OVERVIEW_LIST_EXTRA)) {
+            overviewList = getArguments().getStringArrayList(RecipeDetailActivity.OVERVIEW_LIST_EXTRA);
         }
 
         List<String> list = Arrays.asList("Start", "end");

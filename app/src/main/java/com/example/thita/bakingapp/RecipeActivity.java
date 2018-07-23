@@ -92,7 +92,6 @@ public class RecipeActivity extends AppCompatActivity implements RecipeMenuFragm
 
     @Override
     public void recipeItemClick(Recipe recipeClicked) {
-//        RecipeMenuFragment menuFrag = (RecipeMenuFragment) getSupportFragmentManager().findFragmentById(R.id.recipe_name_menu);
         if (recipeClicked != null){
             List<Step> stepList = recipeClicked.getStepsList();
             List<Ingredient> ingredientList = recipeClicked.getIngredientsList();
