@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.example.thita.bakingapp.Model.Ingredient;
 import com.example.thita.bakingapp.Model.Recipe;
@@ -12,7 +13,7 @@ import com.example.thita.bakingapp.Model.Step;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipeDetailActivity extends AppCompatActivity {
+public class RecipeOverviewActivity extends AppCompatActivity implements RecipeOverviewFragment.OverviewFragListerner {
 
     private Recipe recipe ;
     private android.support.v4.app.FragmentManager mFragmentManager;
@@ -23,6 +24,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
     public static final String RECIPE = "RECIPE_LIST";
     public static final String STEPS_LIST = "STEP_LIST";
     public static final String INGREDIENTS_LIST = "INGREDIENTS_LIST";
+    private static final String tag = RecipeOverviewActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
                 RecipeOverviewFragment overviewFragment = new RecipeOverviewFragment();
                 overviewFragment.setArguments(args);
                 mFragmentManager = getSupportFragmentManager();
-                mFragmentManager.beginTransaction().add(R.id.recipe_detail_overview, overviewFragment).commit();
+                mFragmentManager.beginTransaction().add(R.id.recipe_overview_container, overviewFragment).commit();
 
             }
         }else{
@@ -56,13 +58,28 @@ public class RecipeDetailActivity extends AppCompatActivity {
             RecipeOverviewFragment overviewFragment = new RecipeOverviewFragment();
             overviewFragment.setArguments(args);
             mFragmentManager = getSupportFragmentManager();
-            mFragmentManager.beginTransaction().replace(R.id.recipe_detail_overview, overviewFragment).commit();
+            mFragmentManager.beginTransaction().replace(R.id.recipe_overview_container, overviewFragment).commit();
         }
         setTitle(recipe.getName());
 
     }
 
 
+    @Override
+    public void overviewItemClicked(int position){
+        // tracking on position 0 is Ingredients others index are represented each step
+        if (position == 0){
+            Toast.makeText(getApplicationContext(), "Open IngredientsActivity" , Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(), IngredientsActivity.class);
+//            intent.putExtra(RECIPE_EXTRA, recipeClicked);
+            intent.putParcelableArrayListExtra(INGREDIENTS_LIST, (ArrayList<? extends Parcelable>) ingredientsList);
+//            intent.putParcelableArrayListExtra(STEP_LIST_EXTRA, (ArrayList<? extends Parcelable>) stepList);
+            startActivity(intent);
+        }else {
+            Toast.makeText(getApplicationContext(), "Open StepsActivity" , Toast.LENGTH_SHORT).show();
+        }
+
+    }
 
     private void setOverview(ArrayList<String> overviewList, List<Step> stepsList) {
         overviewList.add(this.recipe.getName() + " Ingredients");

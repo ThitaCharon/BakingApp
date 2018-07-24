@@ -7,12 +7,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.thita.bakingapp.Adapter.RecipeAdapter;
 import com.example.thita.bakingapp.Data.RecipeApi;
 import com.example.thita.bakingapp.Data.RecipeService;
 import com.example.thita.bakingapp.Model.Ingredient;
@@ -21,7 +17,6 @@ import com.example.thita.bakingapp.Model.Step;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -95,8 +90,8 @@ public class RecipeActivity extends AppCompatActivity implements RecipeMenuFragm
         if (recipeClicked != null){
             List<Step> stepList = recipeClicked.getStepsList();
             List<Ingredient> ingredientList = recipeClicked.getIngredientsList();
-            Toast.makeText(this, "Recipe selected name : " + recipeClicked.getName(),Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(getApplicationContext(), RecipeDetailActivity.class);
+            Toast.makeText(this, "Recipe selected name : " + recipeClicked.getName(),Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(), RecipeOverviewActivity.class);
             intent.putExtra(RECIPE_EXTRA, recipeClicked);
             intent.putParcelableArrayListExtra(INGREDIENT_LIST_EXTRA, (ArrayList<? extends Parcelable>) ingredientList);
             intent.putParcelableArrayListExtra(STEP_LIST_EXTRA, (ArrayList<? extends Parcelable>) stepList);

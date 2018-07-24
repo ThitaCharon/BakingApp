@@ -60,7 +60,7 @@ public class RecipeMenuFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull AdapterView<?> parent,@NonNull View view, int position, long id) {
-                Toast.makeText(getContext(), "Clicked at position " + position, Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Clicked at position " + position, Toast.LENGTH_SHORT).show();
                 Recipe recipeSelect = (Recipe) parent.getItemAtPosition(position);
                 if (mCallback != null){
                     mCallback.recipeItemClick(recipeSelect);

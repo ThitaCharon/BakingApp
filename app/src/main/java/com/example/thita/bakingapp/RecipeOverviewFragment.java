@@ -1,19 +1,17 @@
 package com.example.thita.bakingapp;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.thita.bakingapp.Adapter.ListOverviewAdpater;
-import com.example.thita.bakingapp.Adapter.RecipeAdapter;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +21,8 @@ public class RecipeOverviewFragment extends Fragment {
     public final static String OVERVIEW_LIST_EXTRA = "OVERVIEW_EXTRA";
     private ArrayList<String> overviewList = new ArrayList<>();
     private ListOverviewAdpater listOverviewAdpater;
+    private OverviewFragListerner mCallback;
+
 
     public RecipeOverviewFragment() {
     }
@@ -35,8 +35,8 @@ public class RecipeOverviewFragment extends Fragment {
 
         if (saveInstanceState != null){
             overviewList = saveInstanceState.getStringArrayList(OVERVIEW_LIST_EXTRA);
-        }else if( getArguments() != null && getArguments().containsKey(RecipeDetailActivity.OVERVIEW_LIST_EXTRA)) {
-            overviewList = getArguments().getStringArrayList(RecipeDetailActivity.OVERVIEW_LIST_EXTRA);
+        }else if( getArguments() != null && getArguments().containsKey(RecipeOverviewActivity.OVERVIEW_LIST_EXTRA)) {
+            overviewList = getArguments().getStringArrayList(RecipeOverviewActivity.OVERVIEW_LIST_EXTRA);
         }
 
         List<String> list = Arrays.asList("Start", "end");
@@ -44,9 +44,43 @@ public class RecipeOverviewFragment extends Fragment {
         listOverviewAdpater = new ListOverviewAdpater(overviewList, getContext(), R.layout.row_item_overview);
         listView.setAdapter(listOverviewAdpater);
         listOverviewAdpater.notifyDataSetChanged();
+
+        // respond on item clicked
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (mCallback != null){
+                    mCallback.overviewItemClicked(position);
+                }else{
+                    throw new UnsupportedOperationException(
+                            "Callback is currently null, this exception should not have occurred."
+                    );
+                }
+            }
+        });
+
         return rootView;
     }
 
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mCallback = (OverviewFragListerner) context;
+        }
+        catch (ClassCastException e) {
+            throw new ClassCastException(
+                    "The actual class is " +
+                            context.getClass().getName() +
+                            " but requires a RecipeMenuFragListener implementation."
+            );
+        }
+    }
+
+    public interface OverviewFragListerner{
+        public void overviewItemClicked(int postion);
+    }
     @Override
     public void onSaveInstanceState(Bundle currentState){
         super.onSaveInstanceState(currentState);
