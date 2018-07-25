@@ -24,9 +24,9 @@ public class IngredientsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null){
             ingredientList = intent.getParcelableArrayListExtra(RecipeOverviewActivity.INGREDIENTS_LIST);
-            IngredientFragment ingredientFragment = new IngredientFragment();
             Bundle args = new Bundle();
             args.putParcelableArrayList(INGREDIENTS_EXTRA, (ArrayList<? extends Parcelable>) ingredientList);
+            IngredientFragment ingredientFragment = new IngredientFragment();
             ingredientFragment.setArguments(args);
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().add(R.id.ingredients_container,ingredientFragment).commit();

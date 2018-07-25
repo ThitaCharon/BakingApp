@@ -40,6 +40,8 @@ dependencies {
     implementation 'com.android.support:cardview-v7:27.1.1'
     //Picasso loading image
     implementation 'com.squareup.picasso:picasso:2.71828'
+    //ExoPlayer
+    implementation 'com.google.android.exoplayer:exoplayer:2.7.2'
 
     //Logging Network Calls
     implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'

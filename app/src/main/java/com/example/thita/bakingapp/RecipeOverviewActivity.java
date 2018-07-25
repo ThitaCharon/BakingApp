@@ -21,7 +21,7 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
     public List<Step> stepsList;
     public List<Ingredient> ingredientsList;
     public static final String OVERVIEW_LIST_EXTRA = "OVERVIEW_EXTRA";
-    public static final String RECIPE = "RECIPE_LIST";
+    public static final String RECIPE = "RECIPE";
     public static final String STEPS_LIST = "STEP_LIST";
     public static final String INGREDIENTS_LIST = "INGREDIENTS_LIST";
     private static final String tag = RecipeOverviewActivity.class.getSimpleName();
@@ -70,13 +70,16 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
         // tracking on position 0 is Ingredients others index are represented each step
         if (position == 0){
             Toast.makeText(getApplicationContext(), "Open IngredientsActivity" , Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getApplicationContext(), IngredientsActivity.class);
-//            intent.putExtra(RECIPE_EXTRA, recipeClicked);
-            intent.putParcelableArrayListExtra(INGREDIENTS_LIST, (ArrayList<? extends Parcelable>) ingredientsList);
-//            intent.putParcelableArrayListExtra(STEP_LIST_EXTRA, (ArrayList<? extends Parcelable>) stepList);
-            startActivity(intent);
+            Intent intentIngredients = new Intent(getApplicationContext(), IngredientsActivity.class);
+            intentIngredients.putParcelableArrayListExtra(INGREDIENTS_LIST, (ArrayList<? extends Parcelable>) ingredientsList);
+            startActivity(intentIngredients);
         }else {
             Toast.makeText(getApplicationContext(), "Open StepsActivity" , Toast.LENGTH_SHORT).show();
+            Intent intentSteps = new Intent(getApplicationContext(), StepsActivity.class);
+            intentSteps.putExtra(StepsActivity.POSITION, position);
+            intentSteps.putExtra(RECIPE,recipe);
+            intentSteps.putParcelableArrayListExtra(STEPS_LIST, (ArrayList<? extends Parcelable>) stepsList);
+            startActivity(intentSteps);
         }
 
     }
