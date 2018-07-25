@@ -76,7 +76,7 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
         }else {
             Toast.makeText(getApplicationContext(), "Open StepsActivity" , Toast.LENGTH_SHORT).show();
             Intent intentSteps = new Intent(getApplicationContext(), StepsActivity.class);
-            intentSteps.putExtra(StepsActivity.POSITION, position);
+            intentSteps.putExtra(StepsActivity.POSITION, position-1);
             intentSteps.putExtra(RECIPE,recipe);
             intentSteps.putParcelableArrayListExtra(STEPS_LIST, (ArrayList<? extends Parcelable>) stepsList);
             startActivity(intentSteps);

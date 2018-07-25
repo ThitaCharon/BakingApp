@@ -17,6 +17,7 @@ public class StepsActivity extends AppCompatActivity {
     public int pos;
     public Recipe sRecipe;
     public List<Step> stepList;
+    public String Url;
 
     public static final String POSITION = "POSITION";
     public static final String STEPS_LIST = "STEP_LIST";
@@ -34,12 +35,13 @@ public class StepsActivity extends AppCompatActivity {
             pos = intent.getExtras().getInt(POSITION);
             sRecipe = intent.getExtras().getParcelable(RecipeOverviewActivity.RECIPE);
             stepList = intent.getParcelableArrayListExtra(RecipeOverviewActivity.STEPS_LIST);
+            Url = stepList.get(pos).getVideoURL();
 
             Bundle args = new Bundle();
-            args.putInt(POSITION,pos-1);
-            args.putParcelableArrayList(RecipeOverviewActivity.STEPS_LIST, (ArrayList<? extends Parcelable>) stepList);
+            args.putString(PlayerFragment.NAME,sRecipe.getName());
+            args.putString(PlayerFragment.VEDIO_URL,Url);
 
-            // TODO Pupulate Video Player
+            // TODO Populate Video Player
             PlayerFragment playerStepsFragment = new PlayerFragment();
             playerStepsFragment.setArguments(args);
             FragmentManager fragmentManager = getSupportFragmentManager();
