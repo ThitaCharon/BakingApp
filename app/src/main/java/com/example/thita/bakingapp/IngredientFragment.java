@@ -22,12 +22,12 @@ public class IngredientFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_ingredients, container, false);
-        // TODO get ingredientlist from bundle
+        // get ingredientlist from bundle
         listOfIngredients = getArguments().getParcelableArrayList(IngredientsActivity.INGREDIENTS_EXTRA);
         RecyclerView recyclerView = rootView.findViewById(R.id.ingredients_fragment_rv);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
-        //TODO create IngredientsAdapter
+        // create IngredientsAdapter
         IngredientsAdapter ingredientsAdapter = new IngredientsAdapter(getActivity(), listOfIngredients);
         recyclerView.setAdapter(ingredientsAdapter);
         ingredientsAdapter.notifyDataSetChanged();

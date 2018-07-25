@@ -15,6 +15,7 @@ import java.util.List;
 
 public class RecipeOverviewActivity extends AppCompatActivity implements RecipeOverviewFragment.OverviewFragListerner {
 
+    private Boolean mTwoPane;
     private Recipe recipe ;
     private android.support.v4.app.FragmentManager mFragmentManager;
     public ArrayList<String> overviewList = new ArrayList<>();
@@ -31,6 +32,9 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_activity_recipe_overview);
 
+        mTwoPane = findViewById(R.id.activity_steps_linear_layout) != null ;
+        Bundle args = new Bundle();
+
         if (savedInstanceState == null){
 
             Intent intent = getIntent();
@@ -40,12 +44,23 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
                 stepsList = intent.getParcelableArrayListExtra(RecipeActivity.STEP_LIST_EXTRA);
                 ingredientsList = intent.getParcelableArrayListExtra(RecipeActivity.INGREDIENT_LIST_EXTRA);
                 setOverview(overviewList, stepsList);
-                Bundle args = new Bundle();
+                //....
+                args.putParcelableArrayList(IngredientsActivity.INGREDIENTS_EXTRA, (ArrayList<? extends Parcelable>) ingredientsList);
                 args.putStringArrayList(OVERVIEW_LIST_EXTRA, overviewList);
                 RecipeOverviewFragment overviewFragment = new RecipeOverviewFragment();
                 overviewFragment.setArguments(args);
                 mFragmentManager = getSupportFragmentManager();
                 mFragmentManager.beginTransaction().add(R.id.recipe_overview_container, overviewFragment).commit();
+
+                if (mTwoPane){
+
+                    //TODO if in Tablet
+                    IngredientFragment ingredientFragment = new IngredientFragment();
+                    args.putParcelableArrayList(IngredientsActivity.INGREDIENTS_EXTRA, (ArrayList<? extends Parcelable>) ingredientsList);
+                    ingredientFragment.setArguments(args);
+                    mFragmentManager = getSupportFragmentManager();
+                    mFragmentManager.beginTransaction().add(R.id.ingredients_container, ingredientFragment).commit();
+                }
 
             }
         }else{
@@ -53,35 +68,50 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
             ingredientsList = savedInstanceState.getParcelableArrayList(INGREDIENTS_LIST);
             stepsList = savedInstanceState.getParcelableArrayList(STEPS_LIST);
             setOverview(overviewList, stepsList);
-            Bundle args = new Bundle();
+            args.putParcelableArrayList(IngredientsActivity.INGREDIENTS_EXTRA, (ArrayList<? extends Parcelable>) ingredientsList);
             args.putStringArrayList(OVERVIEW_LIST_EXTRA, overviewList);
             RecipeOverviewFragment overviewFragment = new RecipeOverviewFragment();
             overviewFragment.setArguments(args);
             mFragmentManager = getSupportFragmentManager();
             mFragmentManager.beginTransaction().replace(R.id.recipe_overview_container, overviewFragment).commit();
+
+            if (mTwoPane){
+                //TODO if in Tablet
+                IngredientFragment ingredientFragment = new IngredientFragment();
+                args.putParcelableArrayList(IngredientsActivity.INGREDIENTS_EXTRA, (ArrayList<? extends Parcelable>) ingredientsList);
+                ingredientFragment.setArguments(args);
+                mFragmentManager = getSupportFragmentManager();
+                mFragmentManager.beginTransaction().replace(R.id.ingredients_container, ingredientFragment).commit();
+            }
         }
+
         setTitle(recipe.getName());
+
 
     }
 
 
     @Override
     public void overviewItemClicked(int position){
-        // tracking on position 0 is Ingredients others index are represented each step
-        if (position == 0){
-            Toast.makeText(getApplicationContext(), "Open IngredientsActivity" , Toast.LENGTH_SHORT).show();
-            Intent intentIngredients = new Intent(getApplicationContext(), IngredientsActivity.class);
-            intentIngredients.putParcelableArrayListExtra(INGREDIENTS_LIST, (ArrayList<? extends Parcelable>) ingredientsList);
-            startActivity(intentIngredients);
-        }else {
-            Toast.makeText(getApplicationContext(), "Open StepsActivity" , Toast.LENGTH_SHORT).show();
-            Intent intentSteps = new Intent(getApplicationContext(), StepsActivity.class);
-            intentSteps.putExtra(StepsActivity.POSITION, position-1);
-            intentSteps.putExtra(RECIPE,recipe);
-            intentSteps.putParcelableArrayListExtra(STEPS_LIST, (ArrayList<? extends Parcelable>) stepsList);
-            startActivity(intentSteps);
-        }
 
+        if( !mTwoPane) {
+            if (position == 0) {
+                Toast.makeText(getApplicationContext(), "Open IngredientsActivity", Toast.LENGTH_SHORT).show();
+                Intent intentIngredients = new Intent(getApplicationContext(), IngredientsActivity.class);
+                intentIngredients.putParcelableArrayListExtra(INGREDIENTS_LIST, (ArrayList<? extends Parcelable>) ingredientsList);
+                startActivity(intentIngredients);
+            } else {
+                Toast.makeText(getApplicationContext(), "Open StepsActivity", Toast.LENGTH_SHORT).show();
+                Intent intentSteps = new Intent(getApplicationContext(), StepsActivity.class);
+                intentSteps.putExtra(PlayerFragment.VEDIO_URL, stepsList.get(position - 1).getVideoURL());
+                intentSteps.putExtra(DescriptionFragment.NAME, recipe.getName());
+                intentSteps.putExtra(DescriptionFragment.DESCRIPTION, stepsList.get(position - 1).getDescription());
+                intentSteps.putExtra(DescriptionFragment.SHORT_DESCRIPTION, stepsList.get(position - 1).getShortDescription());
+                startActivity(intentSteps);
+            }
+        }else{
+            Toast.makeText(getApplicationContext(),"mTwoPlan on Click crate fragment stept", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void setOverview(ArrayList<String> overviewList, List<Step> stepsList) {

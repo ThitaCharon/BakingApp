@@ -32,13 +32,10 @@ public class RecipeActivity extends AppCompatActivity implements RecipeMenuFragm
     public static final String INGREDIENT_LIST_EXTRA = "RECIPE_LIST_EXTRA";
     public static final String tag = RecipeActivity.class.getSimpleName();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
-
-
         if (getSupportFragmentManager().getFragments().isEmpty() ) {
 
             RecipeMenuFragment menuFragment = new RecipeMenuFragment();
@@ -46,12 +43,8 @@ public class RecipeActivity extends AppCompatActivity implements RecipeMenuFragm
             fragmentManager.beginTransaction()
                     .add(R.id.menu_container, menuFragment).commit();
         }
-
         loadDataAPI();
-        //TODO 2 launch RecipeDetail after user click on menu
 
-
-//            mRecipeList = menuFragment.getRecipeList();
     }
 
 
@@ -87,6 +80,7 @@ public class RecipeActivity extends AppCompatActivity implements RecipeMenuFragm
 
     @Override
     public void recipeItemClick(Recipe recipeClicked) {
+
         if (recipeClicked != null){
             List<Step> stepList = recipeClicked.getStepsList();
             List<Ingredient> ingredientList = recipeClicked.getIngredientsList();

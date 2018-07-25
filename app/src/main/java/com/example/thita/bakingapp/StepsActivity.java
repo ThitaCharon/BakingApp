@@ -2,51 +2,42 @@ package com.example.thita.bakingapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.thita.bakingapp.Model.Recipe;
-import com.example.thita.bakingapp.Model.Step;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class StepsActivity extends AppCompatActivity {
 
-    public int pos;
-    public Recipe sRecipe;
-    public List<Step> stepList;
     public String Url;
-
-    public static final String POSITION = "POSITION";
-    public static final String STEPS_LIST = "STEP_LIST";
-
-
+    public String shortdescrip;
+    public String descrip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_steps);
 
+
         Intent intent = getIntent();
         if (intent != null) {
 
-            pos = intent.getExtras().getInt(POSITION);
-            sRecipe = intent.getExtras().getParcelable(RecipeOverviewActivity.RECIPE);
-            stepList = intent.getParcelableArrayListExtra(RecipeOverviewActivity.STEPS_LIST);
-            Url = stepList.get(pos).getVideoURL();
-
+            Url = intent.getExtras().getString(PlayerFragment.VEDIO_URL);
+            shortdescrip = intent.getExtras().getString(DescriptionFragment.SHORT_DESCRIPTION);
+            descrip = intent.getExtras().getString(DescriptionFragment.DESCRIPTION);
+        }
+            FragmentManager fragmentManager = getSupportFragmentManager();
             Bundle args = new Bundle();
-            args.putString(PlayerFragment.NAME,sRecipe.getName());
             args.putString(PlayerFragment.VEDIO_URL,Url);
+            args.putString(DescriptionFragment.NAME,"Name");
+            args.putString(DescriptionFragment.SHORT_DESCRIPTION, shortdescrip);
+            args.putString(DescriptionFragment.DESCRIPTION, descrip);
 
             // TODO Populate Video Player
             PlayerFragment playerStepsFragment = new PlayerFragment();
             playerStepsFragment.setArguments(args);
-            FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().add(R.id.activity_steps_player_container,playerStepsFragment).commit();
 
-        }
+            DescriptionFragment descriptionFragment = new DescriptionFragment();
+            descriptionFragment.setArguments(args);
+            fragmentManager.beginTransaction().add(R.id.activity_steps_instruction_container, descriptionFragment).commit();
     }
 }

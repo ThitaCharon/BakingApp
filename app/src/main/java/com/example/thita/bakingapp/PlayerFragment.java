@@ -26,13 +26,9 @@ import java.util.List;
 public class PlayerFragment extends Fragment {
 
     public List<Step> listOfSteps;
-    public static String NAME = "NAME";
+
     public static String VEDIO_URL = "URL";
-    public static String DESCRIPTION = "DESCRIPTION";
-    public String name;
     public String vedioUrl;
-    public String shortDescription;
-    public String description;
     private ExoPlayer mExoPlayer = null;
     private ExoPlayer mExoPlayerView = null;
     private MediaSession mediaSession = null;
@@ -48,21 +44,14 @@ public class PlayerFragment extends Fragment {
 
         vedioUrl = getArguments().getString(VEDIO_URL);
 
-//        SimpleExoPlayer player = ExoPlayerFactory
-//                .newSimpleInstance(getContext(),new DefaultTrackSelector());
-        PlayerView playerView = (PlayerView) rootView.findViewById(R.id.player_thumbnail_pv);
+        PlayerView playerView = rootView.findViewById(R.id.player_thumbnail_pv);
 
-        //TODO pass url to initializePlayer
-//        mExoPlayer = initializePlayer(vedioUrl,playerView);
-        // try by actual string
-        mExoPlayer = initializePlayer("https://d17h27t6h515a5.cloudfront.net/topher/2017/April/58ffd9a6_2-mix-sugar-crackers-creampie/2-mix-sugar-crackers-creampie.mp4",playerView);
+        mExoPlayer = initializePlayer(vedioUrl,playerView);
 
         return rootView;
     }
 
 
-
-    //TODO Implement for ExoPlayer
     private ExoPlayer initializePlayer(String urlString, PlayerView playerView) {
         ExoPlayer player = null;
 
