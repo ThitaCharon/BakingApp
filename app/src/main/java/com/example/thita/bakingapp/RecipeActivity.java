@@ -82,8 +82,8 @@ public class RecipeActivity extends AppCompatActivity implements RecipeMenuFragm
     public void recipeItemClick(Recipe recipeClicked) {
 
         if (recipeClicked != null){
-            List<Step> stepList = recipeClicked.getStepsList();
-            List<Ingredient> ingredientList = recipeClicked.getIngredientsList();
+            List<Step> stepList = recipeClicked.getSteps();
+            List<Ingredient> ingredientList = recipeClicked.getIngredients();
             Toast.makeText(this, "Recipe selected name : " + recipeClicked.getName(),Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getApplicationContext(), RecipeOverviewActivity.class);
             intent.putExtra(RECIPE_EXTRA, recipeClicked);

@@ -41,7 +41,10 @@ dependencies {
     //Picasso loading image
     implementation 'com.squareup.picasso:picasso:2.71828'
     //ExoPlayer
-    implementation 'com.google.android.exoplayer:exoplayer:2.7.2'
+    implementation 'com.google.android.exoplayer:exoplayer:2.8.2'
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.8.2'
+    implementation 'com.google.android.exoplayer:exoplayer-dash:2.8.2'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.8.2'
 
     //Logging Network Calls
     implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'

@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="horizontal" android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <FrameLayout
         android:id="@+id/recipe_overview_container"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/ingredients_container"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
+        android:layout_width="350dp"
+        android:layout_height="wrap_content">
     </FrameLayout>
 
     <LinearLayout
         android:id="@+id/activity_steps_linear_layout"
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ingredients_container">
+        </FrameLayout>
 
         <FrameLayout
             android:id="@+id/activity_steps_player_container"
-            android:layout_width="match_parent"
-            android:layout_height="280dp"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
         <FrameLayout
             android:id="@+id/activity_steps_instruction_container"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"/>
         <FrameLayout
             android:id="@+id/activity_steps_navigation_container"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"/>
 
     </LinearLayout>
