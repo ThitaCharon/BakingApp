@@ -1,5 +1,6 @@
 package com.example.thita.bakingapp;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -38,7 +39,6 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
 
 
         if (savedInstanceState == null){
-
             Intent intent = getIntent();
             if (intent != null ) {
 
@@ -61,6 +61,7 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
 
             }
         }else{
+            // TODO check the current position and populate the right layout
             Bundle args = new Bundle();
             recipe = savedInstanceState.getParcelable(RECIPE);
             ingredients = savedInstanceState.getParcelableArrayList(INGREDIENTS_LIST);
@@ -116,12 +117,19 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
                 intentIngredients.putParcelableArrayListExtra(INGREDIENTS_LIST, (ArrayList<? extends Parcelable>) ingredients);
                 startActivity(intentIngredients);
             } else {
+                /**
                 Intent intentSteps = new Intent(getApplicationContext(), StepsActivity.class);
                 intentSteps.putExtra(PlayerFragment.VEDIO_URL, steps.get(position - 1).getVideoURL());
                 intentSteps.putExtra(DescriptionFragment.NAME, recipe.getName());
                 intentSteps.putExtra(DescriptionFragment.DESCRIPTION, steps.get(position - 1).getDescription());
                 intentSteps.putExtra(DescriptionFragment.SHORT_DESCRIPTION, steps.get(position - 1).getShortDescription());
                 startActivity(intentSteps);
+                **/
+                Intent intentNavigate = new Intent(getApplicationContext(), NavigateActivity.class);
+                intentNavigate.putExtra(NavigateActivity.POSITION, position);
+                intentNavigate.putParcelableArrayListExtra(NavigateActivity.STEPS, (ArrayList<? extends Parcelable>) steps);
+                startActivity(intentNavigate);
+
             }
         }
 
