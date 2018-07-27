@@ -1,6 +1,5 @@
 package com.example.thita.bakingapp;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -20,12 +19,12 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
     private Recipe recipe ;
     private android.support.v4.app.FragmentManager mFragmentManager;
     public ArrayList<String> overviewList = new ArrayList<>();
-    public List<Step> steps;
+    public List<Step> stepList;
     public List<Ingredient> ingredients;
-    public static final String OVERVIEW_LIST_EXTRA = "OVERVIEW_EXTRA";
-    public static final String RECIPE = "RECIPE";
-    public static final String STEPS_LIST = "STEP_LIST";
-    public static final String INGREDIENTS_LIST = "INGREDIENTS_LIST";
+//    public static final String OVERVIEW_LIST_EXTRA = "OVERVIEW_EXTRA";
+//    public static final String RECIPE = "RECIPE";
+//    public static final String STEPS_LIST = "STEP_LIST";
+//    public static final String INGREDIENTS_LIST = "INGREDIENTS_LIST";
     private static final String tag = RecipeOverviewActivity.class.getSimpleName();
     Bundle args = new Bundle();
 
@@ -42,12 +41,12 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
             Intent intent = getIntent();
             if (intent != null ) {
 
-                recipe = intent.getParcelableExtra(RecipeActivity.RECIPE_EXTRA);
-                steps = intent.getParcelableArrayListExtra(RecipeActivity.STEP_LIST_EXTRA);
-                ingredients = intent.getParcelableArrayListExtra(RecipeActivity.INGREDIENT_LIST_EXTRA);
-                setOverview(overviewList, steps);
+                recipe = intent.getParcelableExtra(String.valueOf(R.string.KEY_RECIPE));
+                stepList = intent.getParcelableArrayListExtra(String.valueOf(R.string.KEY_STEPS_LIST));
+                ingredients = intent.getParcelableArrayListExtra(String.valueOf(R.string.KEY_INGREDIENT_LIST));
+                setOverview(overviewList, stepList);
                 args.putParcelableArrayList(IngredientsActivity.INGREDIENTS_EXTRA, (ArrayList<? extends Parcelable>) ingredients);
-                args.putStringArrayList(OVERVIEW_LIST_EXTRA, overviewList);
+                args.putStringArrayList(String.valueOf(R.string.KEY_OVERVIEW_LIST), overviewList);
                 RecipeOverviewFragment overviewFragment = new RecipeOverviewFragment();
                 overviewFragment.setArguments(args);
                 mFragmentManager.beginTransaction().add(R.id.recipe_overview_container, overviewFragment).commit();
@@ -63,12 +62,12 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
         }else{
             // TODO check the current position and populate the right layout
             Bundle args = new Bundle();
-            recipe = savedInstanceState.getParcelable(RECIPE);
-            ingredients = savedInstanceState.getParcelableArrayList(INGREDIENTS_LIST);
-            steps = savedInstanceState.getParcelableArrayList(STEPS_LIST);
-            setOverview(overviewList, steps);
+            recipe = savedInstanceState.getParcelable(String.valueOf(R.string.KEY_RECIPE));
+            ingredients = savedInstanceState.getParcelableArrayList(String.valueOf(R.string.KEY_INGREDIENT_LIST));
+            stepList = savedInstanceState.getParcelableArrayList(String.valueOf(R.string.KEY_STEPS_LIST));
+            setOverview(overviewList, stepList);
             args.putParcelableArrayList(IngredientsActivity.INGREDIENTS_EXTRA, (ArrayList<? extends Parcelable>) ingredients);
-            args.putStringArrayList(OVERVIEW_LIST_EXTRA, overviewList);
+            args.putStringArrayList(String.valueOf(R.string.KEY_OVERVIEW_LIST), overviewList);
             RecipeOverviewFragment overviewFragment = new RecipeOverviewFragment();
             overviewFragment.setArguments(args);
             mFragmentManager.beginTransaction().replace(R.id.recipe_overview_container, overviewFragment).commit();
@@ -99,13 +98,13 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
                 // display Clips and description
                 Toast.makeText(getApplicationContext(), "mTwoPane is true", Toast.LENGTH_SHORT).show();
                 PlayerFragment playerFragment = new PlayerFragment();
-                args.putString(PlayerFragment.VEDIO_URL, steps.get(position-1).getVideoURL());
+                args.putString(PlayerFragment.VEDIO_URL, stepList.get(position-1).getVideoURL());
                 playerFragment.setArguments(args);
                 mFragmentManager.beginTransaction().replace(R.id.ingredients_container, playerFragment).commit();
 
                 DescriptionFragment descriptionFragment = new DescriptionFragment();
-                args.putString(DescriptionFragment.DESCRIPTION, steps.get(position-1).getDescription());
-                args.putString(DescriptionFragment.SHORT_DESCRIPTION, steps.get(position-1).getShortDescription());
+                args.putString(DescriptionFragment.DESCRIPTION, stepList.get(position-1).getDescription());
+                args.putString(DescriptionFragment.SHORT_DESCRIPTION, stepList.get(position-1).getShortDescription());
                 descriptionFragment.setArguments(args);
                 mFragmentManager.beginTransaction().replace(R.id.activity_steps_instruction_container, descriptionFragment).commit();
 
@@ -114,22 +113,23 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
 
             if (position == 0) {
                 Intent intentIngredients = new Intent(getApplicationContext(), IngredientsActivity.class);
-                intentIngredients.putParcelableArrayListExtra(INGREDIENTS_LIST, (ArrayList<? extends Parcelable>) ingredients);
+                intentIngredients.putParcelableArrayListExtra(String.valueOf(R.string.KEY_INGREDIENT_LIST), (ArrayList<? extends Parcelable>) ingredients);
                 startActivity(intentIngredients);
             } else {
-                /**
+
                 Intent intentSteps = new Intent(getApplicationContext(), StepsActivity.class);
-                intentSteps.putExtra(PlayerFragment.VEDIO_URL, steps.get(position - 1).getVideoURL());
+                intentSteps.putExtra(PlayerFragment.VEDIO_URL, stepList.get(position - 1).getVideoURL());
                 intentSteps.putExtra(DescriptionFragment.NAME, recipe.getName());
-                intentSteps.putExtra(DescriptionFragment.DESCRIPTION, steps.get(position - 1).getDescription());
-                intentSteps.putExtra(DescriptionFragment.SHORT_DESCRIPTION, steps.get(position - 1).getShortDescription());
+                intentSteps.putExtra(DescriptionFragment.DESCRIPTION, stepList.get(position - 1).getDescription());
+                intentSteps.putExtra(DescriptionFragment.SHORT_DESCRIPTION, stepList.get(position - 1).getShortDescription());
                 startActivity(intentSteps);
-                **/
+
+                /**
                 Intent intentNavigate = new Intent(getApplicationContext(), NavigateActivity.class);
                 intentNavigate.putExtra(NavigateActivity.POSITION, position);
                 intentNavigate.putParcelableArrayListExtra(NavigateActivity.STEPS, (ArrayList<? extends Parcelable>) steps);
                 startActivity(intentNavigate);
-
+                 **/
             }
         }
 
@@ -145,9 +145,9 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelable(RECIPE, recipe);
-        outState.putParcelableArrayList(STEPS_LIST, (ArrayList<? extends Parcelable>) steps);
-        outState.putParcelableArrayList(INGREDIENTS_LIST, (ArrayList<? extends Parcelable>) ingredients);
+        outState.putParcelable(String.valueOf(R.string.KEY_RECIPE), recipe);
+        outState.putParcelableArrayList(String.valueOf(R.string.KEY_STEPS_LIST), (ArrayList<? extends Parcelable>) stepList);
+        outState.putParcelableArrayList(String.valueOf(R.string.KEY_INGREDIENT_LIST), (ArrayList<? extends Parcelable>) ingredients);
     }
 
 

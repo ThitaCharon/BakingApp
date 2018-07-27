@@ -47,8 +47,8 @@ public class RecipeMenuFragment extends Fragment {
 
         Bundle args = getArguments();
 //        recipeList = args.getParcelableArrayList(RecipeActivity.RECIPE_LIST_EXTRA);
-        if (args != null && args.containsKey(RecipeActivity.RECIPE_LIST_EXTRA)) {
-            recipeList = args.getParcelableArrayList(RecipeActivity.RECIPE_LIST_EXTRA);
+        if (args != null && args.containsKey(String.valueOf(R.string.KEY_RECIPE_LIST))) {
+            recipeList = args.getParcelableArrayList(String.valueOf(R.string.KEY_RECIPE_LIST));
         }
         else {
             recipeList = new ArrayList<Recipe>();

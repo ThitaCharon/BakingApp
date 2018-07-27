@@ -3,4 +3,17 @@
     <string name="default_menu">Cheese Cake</string>
     <string name="default_overview">Start by....</string>
 
+    //Key
+    <string name="KEY_RECIPE_LIST">RECIPE_LIST</string>
+    <string name="KEY_RECIPE">RECIPE</string>
+    <string name="KEY_STEPS_LIST">STEPS_LIST</string>
+    <string name="KEY_STEPS">STEPS</string>
+    <string name="KEY_INGREDIENT_LIST">INGREDIENT_LIST</string>
+    <string name="KEY_INGREDIENT">INGREDIENT</string>
+    <string name="KEY_OVERVIEW_LIST">OVERVIEW</string>
+    <string name="KEY_VIDEO_POSITION">VIDEO_POSITION</string>
+
+    /**
+    Recipe , ingredientList, stepsList
+    **/
 </resources>

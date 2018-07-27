@@ -23,7 +23,7 @@ public class IngredientsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent != null){
-            ingredientList = intent.getParcelableArrayListExtra(RecipeOverviewActivity.INGREDIENTS_LIST);
+            ingredientList = intent.getParcelableArrayListExtra(String.valueOf(R.string.KEY_INGREDIENT_LIST));
             Bundle args = new Bundle();
             args.putParcelableArrayList(INGREDIENTS_EXTRA, (ArrayList<? extends Parcelable>) ingredientList);
             IngredientFragment ingredientFragment = new IngredientFragment();

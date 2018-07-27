@@ -2,12 +2,8 @@ package com.example.thita.bakingapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.TableLayout;
 
 public class StepsActivity extends AppCompatActivity {
 
@@ -41,7 +37,6 @@ public class StepsActivity extends AppCompatActivity {
             DescriptionFragment descriptionFragment = new DescriptionFragment();
             descriptionFragment.setArguments(args);
             fragmentManager.beginTransaction().add(R.id.activity_steps_instruction_container, descriptionFragment).commit();
-
     }
 
 }

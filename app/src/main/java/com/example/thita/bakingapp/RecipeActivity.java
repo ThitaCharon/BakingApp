@@ -26,10 +26,10 @@ public class RecipeActivity extends AppCompatActivity implements RecipeMenuFragm
 
 
     public List<Recipe> mRecipeList = new ArrayList<>();
-    public static final String RECIPE_LIST_EXTRA = "RECIPE_LIST_EXTRA";
-    public static final String RECIPE_EXTRA = "RECIPE_EXTRA";
-    public static final String STEP_LIST_EXTRA = "STEP_LIST_EXTRA";
-    public static final String INGREDIENT_LIST_EXTRA = "RECIPE_LIST_EXTRA";
+//    public static final String RECIPE_LIST_EXTRA = "RECIPE_LIST_EXTRA";
+//    public static final String RECIPE_EXTRA = "RECIPE_EXTRA";
+//    public static final String STEP_LIST_EXTRA = "STEP_LIST_EXTRA";
+//    public static final String INGREDIENT_LIST_EXTRA = "RECIPE_LIST_EXTRA";
     public static final String tag = RecipeActivity.class.getSimpleName();
 
     @Override
@@ -56,16 +56,9 @@ public class RecipeActivity extends AppCompatActivity implements RecipeMenuFragm
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
                 mRecipeList.clear();
                 mRecipeList = response.body();
-                Log.d("Menu #1 : ", mRecipeList.get(0).getName());
-                Log.d("Menu #2 : ", mRecipeList.get(1).getName());
-                Log.d("Menu #3 : ", mRecipeList.get(2).getName());
-                Log.d("Menu #4 : ", mRecipeList.get(3).getName());
-                Log.d("Fragment", "Retrofit callBack success & built adapter : of size " + mRecipeList.size());
-
-
                 RecipeMenuFragment menuFragment = new RecipeMenuFragment();
                 Bundle args = new Bundle();
-                args.putParcelableArrayList(RECIPE_LIST_EXTRA, (ArrayList<? extends Parcelable>) mRecipeList);
+                args.putParcelableArrayList(String.valueOf(R.string.KEY_RECIPE_LIST), (ArrayList<? extends Parcelable>) mRecipeList);
                 menuFragment.setArguments(args);
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.menu_container, menuFragment).commit();
@@ -84,19 +77,18 @@ public class RecipeActivity extends AppCompatActivity implements RecipeMenuFragm
         if (recipeClicked != null){
             List<Step> stepList = recipeClicked.getSteps();
             List<Ingredient> ingredientList = recipeClicked.getIngredients();
-            Toast.makeText(this, "Recipe selected name : " + recipeClicked.getName(),Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getApplicationContext(), RecipeOverviewActivity.class);
-            intent.putExtra(RECIPE_EXTRA, recipeClicked);
-            intent.putParcelableArrayListExtra(INGREDIENT_LIST_EXTRA, (ArrayList<? extends Parcelable>) ingredientList);
-            intent.putParcelableArrayListExtra(STEP_LIST_EXTRA, (ArrayList<? extends Parcelable>) stepList);
-            startActivity(intent);
+            Intent intentOverview = new Intent(getApplicationContext(), RecipeOverviewActivity.class);
+            intentOverview.putExtra(String.valueOf(R.string.KEY_RECIPE), recipeClicked);
+            intentOverview.putParcelableArrayListExtra(String.valueOf(R.string.KEY_INGREDIENT_LIST), (ArrayList<? extends Parcelable>) ingredientList);
+            intentOverview.putParcelableArrayListExtra(String.valueOf(R.string.KEY_STEPS_LIST), (ArrayList<? extends Parcelable>) stepList);
+            startActivity(intentOverview);
         }
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle currentState) {
         super.onSaveInstanceState(currentState);
-        currentState.putParcelableArrayList(RECIPE_LIST_EXTRA, (ArrayList<? extends Parcelable>) mRecipeList);
+        currentState.putParcelableArrayList(String.valueOf(R.string.KEY_RECIPE_LIST), (ArrayList<? extends Parcelable>) mRecipeList);
     }
 
 }

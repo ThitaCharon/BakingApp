@@ -144,4 +144,10 @@ public class PlayerFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle currentState){
+        super.onSaveInstanceState(currentState);
+        currentState.putLong(String.valueOf(R.string.KEY_VIDEO_POSITION),currentPosition);
+    }
+
 }

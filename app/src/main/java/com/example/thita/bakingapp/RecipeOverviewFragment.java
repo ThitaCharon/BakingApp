@@ -18,7 +18,7 @@ import java.util.List;
 
 public class RecipeOverviewFragment extends Fragment {
     private static final String tag = RecipeOverviewFragment.class.getSimpleName();
-    public final static String OVERVIEW_LIST_EXTRA = "OVERVIEW_EXTRA";
+//    public final static String OVERVIEW_LIST_EXTRA = "OVERVIEW_EXTRA";
     private ArrayList<String> overviewList = new ArrayList<>();
     private ListOverviewAdpater listOverviewAdpater;
     private OverviewFragListerner mCallback;
@@ -34,9 +34,9 @@ public class RecipeOverviewFragment extends Fragment {
 
 
         if (saveInstanceState != null){
-            overviewList = saveInstanceState.getStringArrayList(OVERVIEW_LIST_EXTRA);
-        }else if( getArguments() != null && getArguments().containsKey(RecipeOverviewActivity.OVERVIEW_LIST_EXTRA)) {
-            overviewList = getArguments().getStringArrayList(RecipeOverviewActivity.OVERVIEW_LIST_EXTRA);
+            overviewList = saveInstanceState.getStringArrayList(String.valueOf(R.string.KEY_OVERVIEW_LIST));
+        }else if( getArguments() != null && getArguments().containsKey(String.valueOf(R.string.KEY_OVERVIEW_LIST))) {
+            overviewList = getArguments().getStringArrayList(String.valueOf(R.string.KEY_OVERVIEW_LIST));
         }
 
         List<String> list = Arrays.asList("Start", "end");
@@ -84,7 +84,7 @@ public class RecipeOverviewFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle currentState){
         super.onSaveInstanceState(currentState);
-        currentState.putStringArrayList(OVERVIEW_LIST_EXTRA,overviewList);
+        currentState.putStringArrayList(String.valueOf(R.string.KEY_OVERVIEW_LIST),overviewList);
     }
 
 }

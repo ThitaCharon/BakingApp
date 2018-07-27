@@ -26,7 +26,6 @@ public class DescriptionFragment extends Fragment {
     private final static String STEP_KEY = "step_key";
 
 
-
     public DescriptionFragment(){}
 
     // newInstance constructor for creating fragment with arguments
@@ -57,20 +56,20 @@ public class DescriptionFragment extends Fragment {
         if (args == null){throw new AssertionError();}
 
         name = getArguments().getString(NAME);
-//        shortDescription = getArguments().getString(SHORT_DESCRIPTION);
-//        description = getArguments().getString(DESCRIPTION);
+        shortDescription = getArguments().getString(SHORT_DESCRIPTION);
+        description = getArguments().getString(DESCRIPTION);
 
-        mStep = args.getParcelable(STEP_KEY);
-
-        if (mStep == null){
-            throw new AssertionError();
-        }
+//        mStep = args.getParcelable(STEP_KEY);
+//
+//        if (mStep == null){
+//            throw new AssertionError();
+//        }
         TextView tvName = rootView.findViewById(R.id.short_description_tv);
         tvName.setText(name);
         TextView tvShortDesc = rootView.findViewById(R.id.short_description_tv);
-        tvShortDesc.setText(mStep.getShortDescription());
+        tvShortDesc.setText(shortDescription);
         TextView tvDesc = rootView.findViewById(R.id.description_tv);
-        tvDesc.setText(mStep.getDescription());
+        tvDesc.setText(description);
 
         return rootView;
     }

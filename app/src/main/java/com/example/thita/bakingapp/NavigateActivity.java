@@ -43,7 +43,7 @@ public class NavigateActivity extends FragmentActivity {
         fragmentManager = getSupportFragmentManager();
         Intent intent = getIntent();
         if (intent != null) {
-            steps = intent.getParcelableArrayListExtra(RecipeActivity.STEP_LIST_EXTRA);
+            steps = intent.getParcelableArrayListExtra(String.valueOf(R.string.KEY_STEPS_LIST));
             position = intent.getExtras().getInt(POSITION);
         }
 
