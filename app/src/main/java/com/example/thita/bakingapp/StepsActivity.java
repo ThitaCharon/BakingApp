@@ -18,13 +18,13 @@ public class StepsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent != null) {
-            Url = intent.getExtras().getString(PlayerFragment.VEDIO_URL);
+            Url = intent.getExtras().getString(String.valueOf(R.string.KEY_VIDEO_URL));
             shortdescrip = intent.getExtras().getString(DescriptionFragment.SHORT_DESCRIPTION);
             descrip = intent.getExtras().getString(DescriptionFragment.DESCRIPTION);
         }
             FragmentManager fragmentManager = getSupportFragmentManager();
             Bundle args = new Bundle();
-            args.putString(PlayerFragment.VEDIO_URL,Url);
+            args.putString(String.valueOf(R.string.KEY_VIDEO_URL),Url);
             args.putString(DescriptionFragment.NAME,"Name");
             args.putString(DescriptionFragment.SHORT_DESCRIPTION, shortdescrip);
             args.putString(DescriptionFragment.DESCRIPTION, descrip);

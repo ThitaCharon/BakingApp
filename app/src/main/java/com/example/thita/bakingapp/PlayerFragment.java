@@ -26,8 +26,8 @@ public class PlayerFragment extends Fragment {
 
     public List<Step> listOfSteps;
 
-    public static String VEDIO_URL = "URL";
-    public static String CURRENT_POSITION = "URL";
+//    public static String VEDIO_URL = "URL";
+//    public static String CURRENT_POSITION = "URL";
     public String vedioUrl;
     private ExoPlayer mExoPlayer = null;
     private ExoPlayer mExoImagePlayer = null;
@@ -41,7 +41,7 @@ public class PlayerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_player, container, false);
 
-        vedioUrl = getArguments().getString(VEDIO_URL);
+        vedioUrl = getArguments().getString(String.valueOf(R.string.KEY_VIDEO_URL));
         PlayerView playerView = rootView.findViewById(R.id.player_thumbnail_pv);
         mExoPlayer = initializePlayer(vedioUrl,playerView);
 
@@ -56,8 +56,8 @@ public class PlayerFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (savedInstanceState != null && currentPosition == 0 ){
-            if (savedInstanceState.containsKey(CURRENT_POSITION)){
-                currentPosition = savedInstanceState.getLong(CURRENT_POSITION);
+            if (savedInstanceState.containsKey(String.valueOf(R.string.KEY_VIDEO_POSITION))){
+                currentPosition = savedInstanceState.getLong(String.valueOf(R.string.KEY_VIDEO_POSITION));
             }else{
                 currentPosition = 0;
             }

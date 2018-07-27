@@ -21,10 +21,6 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
     public ArrayList<String> overviewList = new ArrayList<>();
     public List<Step> stepList;
     public List<Ingredient> ingredients;
-//    public static final String OVERVIEW_LIST_EXTRA = "OVERVIEW_EXTRA";
-//    public static final String RECIPE = "RECIPE";
-//    public static final String STEPS_LIST = "STEP_LIST";
-//    public static final String INGREDIENTS_LIST = "INGREDIENTS_LIST";
     private static final String tag = RecipeOverviewActivity.class.getSimpleName();
     Bundle args = new Bundle();
 
@@ -42,10 +38,10 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
             if (intent != null ) {
 
                 recipe = intent.getParcelableExtra(String.valueOf(R.string.KEY_RECIPE));
-                stepList = intent.getParcelableArrayListExtra(String.valueOf(R.string.KEY_STEPS_LIST));
-                ingredients = intent.getParcelableArrayListExtra(String.valueOf(R.string.KEY_INGREDIENT_LIST));
+                stepList = recipe.getSteps();
+                ingredients = recipe.getIngredients();
                 setOverview(overviewList, stepList);
-                args.putParcelableArrayList(IngredientsActivity.INGREDIENTS_EXTRA, (ArrayList<? extends Parcelable>) ingredients);
+                args.putParcelableArrayList(String.valueOf(R.string.KEY_INGREDIENT_LIST), (ArrayList<? extends Parcelable>) ingredients);
                 args.putStringArrayList(String.valueOf(R.string.KEY_OVERVIEW_LIST), overviewList);
                 RecipeOverviewFragment overviewFragment = new RecipeOverviewFragment();
                 overviewFragment.setArguments(args);
@@ -63,10 +59,10 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
             // TODO check the current position and populate the right layout
             Bundle args = new Bundle();
             recipe = savedInstanceState.getParcelable(String.valueOf(R.string.KEY_RECIPE));
-            ingredients = savedInstanceState.getParcelableArrayList(String.valueOf(R.string.KEY_INGREDIENT_LIST));
-            stepList = savedInstanceState.getParcelableArrayList(String.valueOf(R.string.KEY_STEPS_LIST));
+            stepList = recipe.getSteps();
+            ingredients = recipe.getIngredients();
             setOverview(overviewList, stepList);
-            args.putParcelableArrayList(IngredientsActivity.INGREDIENTS_EXTRA, (ArrayList<? extends Parcelable>) ingredients);
+            args.putParcelableArrayList(String.valueOf(R.string.KEY_INGREDIENT_LIST), (ArrayList<? extends Parcelable>) ingredients);
             args.putStringArrayList(String.valueOf(R.string.KEY_OVERVIEW_LIST), overviewList);
             RecipeOverviewFragment overviewFragment = new RecipeOverviewFragment();
             overviewFragment.setArguments(args);
@@ -74,7 +70,6 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
 
             if (mTwoPane){
                 //TODO if in Tablet
-
                 IngredientFragment ingredientFragment = new IngredientFragment();
                 ingredientFragment.setArguments(args);
                 mFragmentManager.beginTransaction().replace(R.id.ingredients_container, ingredientFragment).commit();
@@ -88,7 +83,6 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
     @Override
     public void overviewItemClicked(int position){
         if (mTwoPane){
-
             if(position == 0){
                 // display ingredient
                 IngredientFragment ingredientFragment = new IngredientFragment();
@@ -98,7 +92,7 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
                 // display Clips and description
                 Toast.makeText(getApplicationContext(), "mTwoPane is true", Toast.LENGTH_SHORT).show();
                 PlayerFragment playerFragment = new PlayerFragment();
-                args.putString(PlayerFragment.VEDIO_URL, stepList.get(position-1).getVideoURL());
+                args.putString(String.valueOf(R.string.KEY_VIDEO_URL), stepList.get(position-1).getVideoURL());
                 playerFragment.setArguments(args);
                 mFragmentManager.beginTransaction().replace(R.id.ingredients_container, playerFragment).commit();
 
@@ -118,10 +112,10 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
             } else {
 
                 Intent intentSteps = new Intent(getApplicationContext(), StepsActivity.class);
-                intentSteps.putExtra(PlayerFragment.VEDIO_URL, stepList.get(position - 1).getVideoURL());
-                intentSteps.putExtra(DescriptionFragment.NAME, recipe.getName());
-                intentSteps.putExtra(DescriptionFragment.DESCRIPTION, stepList.get(position - 1).getDescription());
-                intentSteps.putExtra(DescriptionFragment.SHORT_DESCRIPTION, stepList.get(position - 1).getShortDescription());
+                intentSteps.putExtra(String.valueOf(R.string.KEY_VIDEO_URL), stepList.get(position - 1).getVideoURL());
+                intentSteps.putExtra(String.valueOf(R.string.KEY_NAME), recipe.getName());
+                intentSteps.putExtra(String.valueOf(R.string.KEY_DESCRIPTION), stepList.get(position - 1).getDescription());
+                intentSteps.putExtra(String.valueOf(R.string.KEY_SHORT_DESCRIPTION), stepList.get(position - 1).getShortDescription());
                 startActivity(intentSteps);
 
                 /**

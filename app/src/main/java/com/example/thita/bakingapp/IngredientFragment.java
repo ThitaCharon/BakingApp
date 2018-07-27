@@ -23,7 +23,7 @@ public class IngredientFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_ingredients, container, false);
         // get ingredientlist from bundle
-        listOfIngredients = getArguments().getParcelableArrayList(IngredientsActivity.INGREDIENTS_EXTRA);
+        listOfIngredients = getArguments().getParcelableArrayList(String.valueOf(R.string.KEY_INGREDIENT_LIST));
         RecyclerView recyclerView = rootView.findViewById(R.id.ingredients_fragment_rv);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);

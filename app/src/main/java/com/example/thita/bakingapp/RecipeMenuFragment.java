@@ -46,38 +46,26 @@ public class RecipeMenuFragment extends Fragment {
         final ListView listView = rootView.findViewById(R.id.lv_menu_fragment);
 
         Bundle args = getArguments();
-//        recipeList = args.getParcelableArrayList(RecipeActivity.RECIPE_LIST_EXTRA);
         if (args != null && args.containsKey(String.valueOf(R.string.KEY_RECIPE_LIST))) {
             recipeList = args.getParcelableArrayList(String.valueOf(R.string.KEY_RECIPE_LIST));
         }
         else {
             recipeList = new ArrayList<Recipe>();
         }
-        Log.d(tag,"Recipe : " + recipeList.isEmpty() +recipeList.size());
         recipeAdapter = new RecipeAdapter(recipeList, R.layout.row_item_recipe, getContext());
         listView.setAdapter(recipeAdapter);
         recipeAdapter.notifyDataSetChanged();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull AdapterView<?> parent,@NonNull View view, int position, long id) {
-                Toast.makeText(getContext(), "Clicked at position " + position, Toast.LENGTH_SHORT).show();
                 Recipe recipeSelect = (Recipe) parent.getItemAtPosition(position);
                 if (mCallback != null){
                     mCallback.recipeItemClick(recipeSelect);
-                    Log.d(tag, "mCallback pass data");
                 }else{
-                    throw new UnsupportedOperationException(
-                            "Callback is currently null, this exception should not have occurred."
-                    );
-                }
-            }
-        });
+                    throw new UnsupportedOperationException("Callback is currently null, this exception should not have occurred."); } }
+            });
 
         return  rootView;
-    }
-
-    public void setRecipeList(List<Recipe> recipeList){
-        this.recipeList = recipeList;
     }
 
 
@@ -92,16 +80,8 @@ public class RecipeMenuFragment extends Fragment {
             mCallback = (RecipeMenuFragListener) context;
         }
         catch (ClassCastException e) {
-            throw new ClassCastException(
-                    "The actual class is " +
-                            context.getClass().getName() +
-                            " but requires a RecipeMenuFragListener implementation."
-            );
-        }
+            throw new ClassCastException("The actual class is " + context.getClass().getName() + " but requires a RecipeMenuFragListener implementation."); }
     }
-
-
-
 
 
 }

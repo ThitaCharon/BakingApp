@@ -13,7 +13,7 @@ import java.util.List;
 
 public class IngredientsActivity extends AppCompatActivity {
 
-    public static final String INGREDIENTS_EXTRA = "INGREDIENTS_EXTRA";
+//    public static final String INGREDIENTS_EXTRA = "INGREDIENTS_EXTRA";
     public List<Ingredient> ingredientList;
 
     @Override
@@ -25,7 +25,7 @@ public class IngredientsActivity extends AppCompatActivity {
         if (intent != null){
             ingredientList = intent.getParcelableArrayListExtra(String.valueOf(R.string.KEY_INGREDIENT_LIST));
             Bundle args = new Bundle();
-            args.putParcelableArrayList(INGREDIENTS_EXTRA, (ArrayList<? extends Parcelable>) ingredientList);
+            args.putParcelableArrayList(String.valueOf(R.string.KEY_INGREDIENT_LIST), (ArrayList<? extends Parcelable>) ingredientList);
             IngredientFragment ingredientFragment = new IngredientFragment();
             ingredientFragment.setArguments(args);
             FragmentManager fragmentManager = getSupportFragmentManager();

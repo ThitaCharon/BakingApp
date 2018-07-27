@@ -26,10 +26,6 @@ public class RecipeActivity extends AppCompatActivity implements RecipeMenuFragm
 
 
     public List<Recipe> mRecipeList = new ArrayList<>();
-//    public static final String RECIPE_LIST_EXTRA = "RECIPE_LIST_EXTRA";
-//    public static final String RECIPE_EXTRA = "RECIPE_EXTRA";
-//    public static final String STEP_LIST_EXTRA = "STEP_LIST_EXTRA";
-//    public static final String INGREDIENT_LIST_EXTRA = "RECIPE_LIST_EXTRA";
     public static final String tag = RecipeActivity.class.getSimpleName();
 
     @Override
@@ -79,8 +75,9 @@ public class RecipeActivity extends AppCompatActivity implements RecipeMenuFragm
             List<Ingredient> ingredientList = recipeClicked.getIngredients();
             Intent intentOverview = new Intent(getApplicationContext(), RecipeOverviewActivity.class);
             intentOverview.putExtra(String.valueOf(R.string.KEY_RECIPE), recipeClicked);
-            intentOverview.putParcelableArrayListExtra(String.valueOf(R.string.KEY_INGREDIENT_LIST), (ArrayList<? extends Parcelable>) ingredientList);
-            intentOverview.putParcelableArrayListExtra(String.valueOf(R.string.KEY_STEPS_LIST), (ArrayList<? extends Parcelable>) stepList);
+//            intentOverview.putExtra(String.valueOf(R.string.KEY_NAME),recipeClicked.getName());
+//            intentOverview.putParcelableArrayListExtra(String.valueOf(R.string.KEY_INGREDIENT_LIST), (ArrayList<? extends Parcelable>) ingredientList);
+//            intentOverview.putParcelableArrayListExtra(String.valueOf(R.string.KEY_STEPS_LIST), (ArrayList<? extends Parcelable>) stepList);
             startActivity(intentOverview);
         }
     }

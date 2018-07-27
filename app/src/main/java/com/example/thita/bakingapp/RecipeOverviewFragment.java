@@ -18,11 +18,9 @@ import java.util.List;
 
 public class RecipeOverviewFragment extends Fragment {
     private static final String tag = RecipeOverviewFragment.class.getSimpleName();
-//    public final static String OVERVIEW_LIST_EXTRA = "OVERVIEW_EXTRA";
     private ArrayList<String> overviewList = new ArrayList<>();
     private ListOverviewAdpater listOverviewAdpater;
     private OverviewFragListerner mCallback;
-
 
     public RecipeOverviewFragment() {
     }
@@ -52,12 +50,8 @@ public class RecipeOverviewFragment extends Fragment {
                 if (mCallback != null){
                     mCallback.overviewItemClicked(position);
                 }else{
-                    throw new UnsupportedOperationException(
-                            "Callback is currently null, this exception should not have occurred."
-                    );
-                }
-            }
-        });
+                    throw new UnsupportedOperationException("Callback is currently null, this exception should not have occurred."); }
+            }});
 
         return rootView;
     }
@@ -70,12 +64,8 @@ public class RecipeOverviewFragment extends Fragment {
             mCallback = (OverviewFragListerner) context;
         }
         catch (ClassCastException e) {
-            throw new ClassCastException(
-                    "The actual class is " +
-                            context.getClass().getName() +
-                            " but requires a RecipeMenuFragListener implementation."
-            );
-        }
+            throw new ClassCastException("The actual class is " + context.getClass().getName()
+                    + " but requires a RecipeMenuFragListener implementation."); }
     }
 
     public interface OverviewFragListerner{

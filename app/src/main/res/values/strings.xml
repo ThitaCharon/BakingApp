@@ -6,13 +6,16 @@
     //Key
     <string name="KEY_RECIPE_LIST">RECIPE_LIST</string>
     <string name="KEY_RECIPE">RECIPE</string>
+    <string name="KEY_NAME">NAME</string>
     <string name="KEY_STEPS_LIST">STEPS_LIST</string>
     <string name="KEY_STEPS">STEPS</string>
     <string name="KEY_INGREDIENT_LIST">INGREDIENT_LIST</string>
     <string name="KEY_INGREDIENT">INGREDIENT</string>
     <string name="KEY_OVERVIEW_LIST">OVERVIEW</string>
     <string name="KEY_VIDEO_POSITION">VIDEO_POSITION</string>
-
+    <string name="KEY_DESCRIPTION">DESCRIPTION</string>
+    <string name="KEY_SHORT_DESCRIPTION">SHORT_DESCRIPTION</string>
+    <string name="KEY_VIDEO_URL">URL</string>
     /**
     Recipe , ingredientList, stepsList
     **/
