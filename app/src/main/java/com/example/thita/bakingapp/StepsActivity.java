@@ -5,38 +5,58 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
+
 public class StepsActivity extends AppCompatActivity {
 
-    public String Url;
-    public String shortdescrip;
-    public String descrip;
+    private String url;
+    private String shortdescrip;
+    private String descrip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_steps);
 
+
         Intent intent = getIntent();
-        if (intent != null) {
-            Url = intent.getExtras().getString(String.valueOf(R.string.KEY_VIDEO_URL));
-            shortdescrip = intent.getExtras().getString(DescriptionFragment.SHORT_DESCRIPTION);
-            descrip = intent.getExtras().getString(DescriptionFragment.DESCRIPTION);
+        if (savedInstanceState == null) {
+            if (intent != null) {
+                url =intent.getStringExtra(String.valueOf(R.string.KEY_VIDEO_URL));
+                shortdescrip = intent.getStringExtra(String.valueOf(R.string.KEY_SHORT_DESCRIPTION));
+                descrip = intent.getStringExtra(String.valueOf(R.string.KEY_DESCRIPTION));
+            }
+        }else{
+            url = savedInstanceState.getString(String.valueOf(R.string.KEY_VIDEO_URL));
+            shortdescrip = savedInstanceState.getString(String.valueOf(R.string.KEY_SHORT_DESCRIPTION));
+            descrip = savedInstanceState.getString(String.valueOf(R.string.KEY_DESCRIPTION));
         }
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            Bundle args = new Bundle();
-            args.putString(String.valueOf(R.string.KEY_VIDEO_URL),Url);
-            args.putString(DescriptionFragment.NAME,"Name");
-            args.putString(DescriptionFragment.SHORT_DESCRIPTION, shortdescrip);
-            args.putString(DescriptionFragment.DESCRIPTION, descrip);
 
-            // TODO Populate Video Player
-            PlayerFragment playerStepsFragment = new PlayerFragment();
-            playerStepsFragment.setArguments(args);
-            fragmentManager.beginTransaction().add(R.id.activity_steps_player_container,playerStepsFragment).commit();
+        Bundle args = new Bundle();
+        args.putString(String.valueOf(R.string.KEY_VIDEO_URL),url);
+        args.putString(DescriptionFragment.SHORT_DESCRIPTION, shortdescrip);
+        args.putString(DescriptionFragment.DESCRIPTION, descrip);
 
-            DescriptionFragment descriptionFragment = new DescriptionFragment();
-            descriptionFragment.setArguments(args);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        PlayerFragment playerStepsFragment = new PlayerFragment();
+        DescriptionFragment descriptionFragment = new DescriptionFragment();
+        playerStepsFragment.setArguments(args);
+        descriptionFragment.setArguments(args);
+
+        if (savedInstanceState != null) {
+//            fragmentManager.beginTransaction().replace(R.id.activity_steps_player_container, playerStepsFragment).commit();
+            fragmentManager.beginTransaction().replace(R.id.activity_steps_instruction_container, descriptionFragment).commit();
+        }else{
+//            fragmentManager.beginTransaction().add(R.id.activity_steps_player_container, playerStepsFragment).commit();
             fragmentManager.beginTransaction().add(R.id.activity_steps_instruction_container, descriptionFragment).commit();
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(String.valueOf(R.string.KEY_VIDEO_URL), url);
+        outState.putString(String.valueOf(R.string.KEY_SHORT_DESCRIPTION), shortdescrip);
+        outState.putString(String.valueOf(R.string.KEY_DESCRIPTION), descrip);
     }
 
 }

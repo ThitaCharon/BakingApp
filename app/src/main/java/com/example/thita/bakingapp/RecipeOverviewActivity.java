@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.thita.bakingapp.Model.Ingredient;
@@ -23,6 +24,8 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
     public List<Ingredient> ingredients;
     private static final String tag = RecipeOverviewActivity.class.getSimpleName();
     Bundle args = new Bundle();
+    private String url;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +34,6 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
         mFragmentManager = getSupportFragmentManager();
 
         mTwoPane = findViewById(R.id.activity_steps_linear_layout) != null ;
-
-
         if (savedInstanceState == null){
             Intent intent = getIntent();
             if (intent != null ) {
@@ -57,7 +58,6 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
             }
         }else{
             // TODO check the current position and populate the right layout
-            Bundle args = new Bundle();
             recipe = savedInstanceState.getParcelable(String.valueOf(R.string.KEY_RECIPE));
             stepList = recipe.getSteps();
             ingredients = recipe.getIngredients();
@@ -113,6 +113,7 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
 
                 Intent intentSteps = new Intent(getApplicationContext(), StepsActivity.class);
                 intentSteps.putExtra(String.valueOf(R.string.KEY_VIDEO_URL), stepList.get(position - 1).getVideoURL());
+                url = stepList.get(position - 1).getVideoURL();
                 intentSteps.putExtra(String.valueOf(R.string.KEY_NAME), recipe.getName());
                 intentSteps.putExtra(String.valueOf(R.string.KEY_DESCRIPTION), stepList.get(position - 1).getDescription());
                 intentSteps.putExtra(String.valueOf(R.string.KEY_SHORT_DESCRIPTION), stepList.get(position - 1).getShortDescription());
