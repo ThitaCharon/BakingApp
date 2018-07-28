@@ -1,12 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
 
     <com.google.android.exoplayer2.ui.PlayerView
-        android:id="@+id/player_thumbnail_pv"
+        android:id="@+id/player_pv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </com.google.android.exoplayer2.ui.PlayerView>
+        android:layout_height="300dp"
+        android:layout_weight="0"/>
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/short_description_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_weight="0"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="title"
+        android:textColor="@color/colorPrimary"/>
+
+    <TextView
+        android:id="@+id/description_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_weight="0"
+        android:textSize="18sp"
+        android:text="descripiton"
+        android:textStyle="italic"
+        android:textColor="@color/colorPrimary"/>
+
+</LinearLayout>

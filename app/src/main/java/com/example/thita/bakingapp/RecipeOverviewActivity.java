@@ -24,7 +24,6 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
     public List<Ingredient> ingredients;
     private static final String tag = RecipeOverviewActivity.class.getSimpleName();
     Bundle args = new Bundle();
-    private String url;
 
 
     @Override
@@ -32,8 +31,8 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_activity_recipe_overview);
         mFragmentManager = getSupportFragmentManager();
-
         mTwoPane = findViewById(R.id.activity_steps_linear_layout) != null ;
+        
         if (savedInstanceState == null){
             Intent intent = getIntent();
             if (intent != null ) {
@@ -113,7 +112,6 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
 
                 Intent intentSteps = new Intent(getApplicationContext(), StepsActivity.class);
                 intentSteps.putExtra(String.valueOf(R.string.KEY_VIDEO_URL), stepList.get(position - 1).getVideoURL());
-                url = stepList.get(position - 1).getVideoURL();
                 intentSteps.putExtra(String.valueOf(R.string.KEY_NAME), recipe.getName());
                 intentSteps.putExtra(String.valueOf(R.string.KEY_DESCRIPTION), stepList.get(position - 1).getDescription());
                 intentSteps.putExtra(String.valueOf(R.string.KEY_SHORT_DESCRIPTION), stepList.get(position - 1).getShortDescription());

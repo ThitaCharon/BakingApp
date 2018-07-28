@@ -33,21 +33,21 @@ public class StepsActivity extends AppCompatActivity {
 
         Bundle args = new Bundle();
         args.putString(String.valueOf(R.string.KEY_VIDEO_URL),url);
-        args.putString(DescriptionFragment.SHORT_DESCRIPTION, shortdescrip);
-        args.putString(DescriptionFragment.DESCRIPTION, descrip);
+        args.putString(String.valueOf(R.string.KEY_SHORT_DESCRIPTION), shortdescrip);
+        args.putString(String.valueOf(R.string.KEY_DESCRIPTION), descrip);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         PlayerFragment playerStepsFragment = new PlayerFragment();
-        DescriptionFragment descriptionFragment = new DescriptionFragment();
         playerStepsFragment.setArguments(args);
-        descriptionFragment.setArguments(args);
+//        DescriptionFragment descriptionFragment = new DescriptionFragment();
+//        descriptionFragment.setArguments(args);
 
         if (savedInstanceState != null) {
-//            fragmentManager.beginTransaction().replace(R.id.activity_steps_player_container, playerStepsFragment).commit();
-            fragmentManager.beginTransaction().replace(R.id.activity_steps_instruction_container, descriptionFragment).commit();
+            fragmentManager.beginTransaction().replace(R.id.activity_steps_player_container, playerStepsFragment).commit();
+//            fragmentManager.beginTransaction().replace(R.id.activity_steps_instruction_container, descriptionFragment).commit();
         }else{
-//            fragmentManager.beginTransaction().add(R.id.activity_steps_player_container, playerStepsFragment).commit();
-            fragmentManager.beginTransaction().add(R.id.activity_steps_instruction_container, descriptionFragment).commit();
+            fragmentManager.beginTransaction().add(R.id.activity_steps_player_container, playerStepsFragment).commit();
+//            fragmentManager.beginTransaction().add(R.id.activity_steps_instruction_container, descriptionFragment).commit();
         }
     }
 

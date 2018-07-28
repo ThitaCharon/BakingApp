@@ -9,30 +9,36 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.thita.bakingapp.Model.Step;
+import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.LoadControl;
+import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
+import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
-import java.net.URL;
 import java.util.List;
 
 public class PlayerFragment extends Fragment {
 
-    public List<Step> listOfSteps;
-
-//    public static String VEDIO_URL = "URL";
-//    public static String CURRENT_POSITION = "URL";
     public String vedioUrl;
     private ExoPlayer mExoPlayer = null;
     private ExoPlayer mExoImagePlayer = null;
     private MediaSession mediaSession = null;
+    private TextView shortDescriptionTV;
+    private TextView descriptionTV;
     private long currentPosition = 0;
+    private PlayerView playerView;
+    public String shortDescription;
+    public String description;
 
 
     public PlayerFragment(){}
@@ -40,17 +46,32 @@ public class PlayerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_player, container, false);
+        playerView = rootView.findViewById(R.id.player_pv);
+        shortDescriptionTV = rootView.findViewById(R.id.short_description_tv);
+        descriptionTV = rootView.findViewById(R.id.description_tv);
 
+        Bundle args = getArguments();
+        if (args == null){throw new AssertionError();}
         vedioUrl = getArguments().getString(String.valueOf(R.string.KEY_VIDEO_URL));
-        PlayerView playerView = rootView.findViewById(R.id.player_thumbnail_pv);
+        shortDescription = getArguments().getString(String.valueOf(R.string.KEY_SHORT_DESCRIPTION));
+        description = getArguments().getString(String.valueOf(R.string.KEY_DESCRIPTION));
+
+        if (saveInstanceState != null){
+            currentPosition = saveInstanceState.getLong(String.valueOf(R.string.KEY_VIDEO_POSITION));
+        }
+
+        shortDescriptionTV.setText(shortDescription);
+        descriptionTV.setText(description);
         mExoPlayer = initializePlayer(vedioUrl,playerView);
 
         return rootView;
     }
 
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);}
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -69,13 +90,13 @@ public class PlayerFragment extends Fragment {
     }
 
     private ExoPlayer initializePlayer(String urlString, PlayerView playerView) {
+
         ExoPlayer player = null;
 
         if (urlString != null && !urlString.isEmpty()) {
             player = ExoPlayerFactory.newSimpleInstance(getContext(),
                     new DefaultTrackSelector());
             playerView.setPlayer(player);
-            // player.addListener(this);
             playerView.setControllerShowTimeoutMs(0);
             playerView.setControllerHideOnTouch(false);
 
@@ -91,6 +112,12 @@ public class PlayerFragment extends Fragment {
 
         return player;
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
 
     @Override
     public void onDestroy() {
@@ -121,7 +148,8 @@ public class PlayerFragment extends Fragment {
         super.onResume();
 
         if (mExoPlayer == null && vedioUrl!= null ) {
-            mExoPlayer.seekTo(currentPosition);
+//            mExoPlayer.seekTo(currentPosition);
+            initializePlayer(vedioUrl,playerView);
         }
 
     }
@@ -144,10 +172,12 @@ public class PlayerFragment extends Fragment {
         }
     }
 
+
     @Override
     public void onSaveInstanceState(Bundle currentState){
         super.onSaveInstanceState(currentState);
         currentState.putLong(String.valueOf(R.string.KEY_VIDEO_POSITION),currentPosition);
     }
+
 
 }
