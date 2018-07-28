@@ -24,7 +24,6 @@ import retrofit2.Response;
 
 public class RecipeActivity extends AppCompatActivity implements RecipeMenuFragment.RecipeMenuFragListener {
 
-
     public List<Recipe> mRecipeList = new ArrayList<>();
     public static final String tag = RecipeActivity.class.getSimpleName();
 
@@ -40,9 +39,7 @@ public class RecipeActivity extends AppCompatActivity implements RecipeMenuFragm
                     .add(R.id.menu_container, menuFragment).commit();
         }
         loadDataAPI();
-
     }
-
 
     private void loadDataAPI(){
         RecipeService recipyService = RecipeApi.getApi().create(RecipeService.class);
@@ -75,9 +72,6 @@ public class RecipeActivity extends AppCompatActivity implements RecipeMenuFragm
             List<Ingredient> ingredientList = recipeClicked.getIngredients();
             Intent intentOverview = new Intent(getApplicationContext(), RecipeOverviewActivity.class);
             intentOverview.putExtra(String.valueOf(R.string.KEY_RECIPE), recipeClicked);
-//            intentOverview.putExtra(String.valueOf(R.string.KEY_NAME),recipeClicked.getName());
-//            intentOverview.putParcelableArrayListExtra(String.valueOf(R.string.KEY_INGREDIENT_LIST), (ArrayList<? extends Parcelable>) ingredientList);
-//            intentOverview.putParcelableArrayListExtra(String.valueOf(R.string.KEY_STEPS_LIST), (ArrayList<? extends Parcelable>) stepList);
             startActivity(intentOverview);
         }
     }

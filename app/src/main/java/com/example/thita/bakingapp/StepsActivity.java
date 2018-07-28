@@ -39,15 +39,11 @@ public class StepsActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         PlayerFragment playerStepsFragment = new PlayerFragment();
         playerStepsFragment.setArguments(args);
-//        DescriptionFragment descriptionFragment = new DescriptionFragment();
-//        descriptionFragment.setArguments(args);
 
         if (savedInstanceState != null) {
             fragmentManager.beginTransaction().replace(R.id.activity_steps_player_container, playerStepsFragment).commit();
-//            fragmentManager.beginTransaction().replace(R.id.activity_steps_instruction_container, descriptionFragment).commit();
         }else{
             fragmentManager.beginTransaction().add(R.id.activity_steps_player_container, playerStepsFragment).commit();
-//            fragmentManager.beginTransaction().add(R.id.activity_steps_instruction_container, descriptionFragment).commit();
         }
     }
 

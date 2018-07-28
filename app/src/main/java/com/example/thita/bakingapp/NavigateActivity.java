@@ -19,6 +19,7 @@ import com.example.thita.bakingapp.Model.Step;
 
 import java.util.List;
 
+/**
 public class NavigateActivity extends FragmentActivity {
 
 
@@ -77,3 +78,4 @@ public class NavigateActivity extends FragmentActivity {
 
 }
 
+*/

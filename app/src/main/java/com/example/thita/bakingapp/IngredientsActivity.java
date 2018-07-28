@@ -13,7 +13,6 @@ import java.util.List;
 
 public class IngredientsActivity extends AppCompatActivity {
 
-//    public static final String INGREDIENTS_EXTRA = "INGREDIENTS_EXTRA";
     public List<Ingredient> ingredientList;
 
     @Override

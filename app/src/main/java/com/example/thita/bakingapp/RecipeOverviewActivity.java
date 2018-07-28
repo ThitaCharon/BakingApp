@@ -92,15 +92,10 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
                 Toast.makeText(getApplicationContext(), "mTwoPane is true", Toast.LENGTH_SHORT).show();
                 PlayerFragment playerFragment = new PlayerFragment();
                 args.putString(String.valueOf(R.string.KEY_VIDEO_URL), stepList.get(position-1).getVideoURL());
+                args.putString(String.valueOf(R.string.KEY_DESCRIPTION), stepList.get(position-1).getDescription());
+                args.putString(String.valueOf(R.string.KEY_SHORT_DESCRIPTION), stepList.get(position-1).getShortDescription());
                 playerFragment.setArguments(args);
                 mFragmentManager.beginTransaction().replace(R.id.ingredients_container, playerFragment).commit();
-
-                DescriptionFragment descriptionFragment = new DescriptionFragment();
-                args.putString(DescriptionFragment.DESCRIPTION, stepList.get(position-1).getDescription());
-                args.putString(DescriptionFragment.SHORT_DESCRIPTION, stepList.get(position-1).getShortDescription());
-                descriptionFragment.setArguments(args);
-                mFragmentManager.beginTransaction().replace(R.id.activity_steps_instruction_container, descriptionFragment).commit();
-
             }
         }else { // Handle on Cell phone device
 
@@ -116,13 +111,6 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
                 intentSteps.putExtra(String.valueOf(R.string.KEY_DESCRIPTION), stepList.get(position - 1).getDescription());
                 intentSteps.putExtra(String.valueOf(R.string.KEY_SHORT_DESCRIPTION), stepList.get(position - 1).getShortDescription());
                 startActivity(intentSteps);
-
-                /**
-                Intent intentNavigate = new Intent(getApplicationContext(), NavigateActivity.class);
-                intentNavigate.putExtra(NavigateActivity.POSITION, position);
-                intentNavigate.putParcelableArrayListExtra(NavigateActivity.STEPS, (ArrayList<? extends Parcelable>) steps);
-                startActivity(intentNavigate);
-                 **/
             }
         }
 
