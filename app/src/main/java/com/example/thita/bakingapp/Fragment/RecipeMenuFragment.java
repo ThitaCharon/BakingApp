@@ -1,31 +1,21 @@
-package com.example.thita.bakingapp;
+package com.example.thita.bakingapp.Fragment;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.example.thita.bakingapp.Data.RecipeApi;
-import com.example.thita.bakingapp.Data.RecipeService;
 import com.example.thita.bakingapp.Model.Recipe;
 import com.example.thita.bakingapp.Adapter.RecipeAdapter;
+import com.example.thita.bakingapp.R;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class RecipeMenuFragment extends Fragment {
 

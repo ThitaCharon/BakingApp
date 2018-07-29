@@ -4,9 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.widget.Toast;
 
+import com.example.thita.bakingapp.Fragment.IngredientFragment;
+import com.example.thita.bakingapp.Fragment.PlayerFragment;
+import com.example.thita.bakingapp.Fragment.RecipeOverviewFragment;
 import com.example.thita.bakingapp.Model.Ingredient;
 import com.example.thita.bakingapp.Model.Recipe;
 import com.example.thita.bakingapp.Model.Step;
@@ -89,7 +90,6 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
                 mFragmentManager.beginTransaction().replace(R.id.ingredients_container, ingredientFragment).commit();
             }else{
                 // display Clips and description
-                Toast.makeText(getApplicationContext(), "mTwoPane is true", Toast.LENGTH_SHORT).show();
                 PlayerFragment playerFragment = new PlayerFragment();
                 args.putString(String.valueOf(R.string.KEY_VIDEO_URL), stepList.get(position-1).getVideoURL());
                 args.putString(String.valueOf(R.string.KEY_DESCRIPTION), stepList.get(position-1).getDescription());
@@ -106,10 +106,8 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
             } else {
 
                 Intent intentSteps = new Intent(getApplicationContext(), StepsActivity.class);
-                intentSteps.putExtra(String.valueOf(R.string.KEY_VIDEO_URL), stepList.get(position - 1).getVideoURL());
-                intentSteps.putExtra(String.valueOf(R.string.KEY_NAME), recipe.getName());
-                intentSteps.putExtra(String.valueOf(R.string.KEY_DESCRIPTION), stepList.get(position - 1).getDescription());
-                intentSteps.putExtra(String.valueOf(R.string.KEY_SHORT_DESCRIPTION), stepList.get(position - 1).getShortDescription());
+                intentSteps.putExtra(String.valueOf(R.string.KEY_INDEX_POSIRION), position-1);
+                intentSteps.putParcelableArrayListExtra(String.valueOf(R.string.KEY_STEPS_LIST), (ArrayList<? extends Parcelable>) stepList);
                 startActivity(intentSteps);
             }
         }

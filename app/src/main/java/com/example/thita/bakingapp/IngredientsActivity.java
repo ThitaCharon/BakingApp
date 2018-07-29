@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.thita.bakingapp.Fragment.IngredientFragment;
 import com.example.thita.bakingapp.Model.Ingredient;
 
 import java.util.ArrayList;

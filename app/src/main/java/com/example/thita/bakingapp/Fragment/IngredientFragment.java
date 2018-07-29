@@ -1,4 +1,4 @@
-package com.example.thita.bakingapp;
+package com.example.thita.bakingapp.Fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.thita.bakingapp.Adapter.IngredientsAdapter;
 import com.example.thita.bakingapp.Model.Ingredient;
+import com.example.thita.bakingapp.R;
 
 import java.util.List;
 

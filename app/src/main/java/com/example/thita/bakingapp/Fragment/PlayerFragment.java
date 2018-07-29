@@ -1,4 +1,4 @@
-package com.example.thita.bakingapp;
+package com.example.thita.bakingapp.Fragment;
 
 import android.content.Context;
 import android.net.Uri;
@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.thita.bakingapp.R;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
@@ -52,7 +53,9 @@ public class PlayerFragment extends Fragment {
 
         shortDescriptionTV.setText(shortDescription);
         descriptionTV.setText(description);
-        mExoPlayer = initializePlayer(vedioUrl,playerView);
+        if (vedioUrl != null) {
+            mExoPlayer = initializePlayer(vedioUrl, playerView);
+        }
 
         return rootView;
     }

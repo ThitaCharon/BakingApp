@@ -16,7 +16,5 @@
     <string name="KEY_DESCRIPTION">DESCRIPTION</string>
     <string name="KEY_SHORT_DESCRIPTION">SHORT_DESCRIPTION</string>
     <string name="KEY_VIDEO_URL">URL</string>
-    /**
-    Recipe , ingredientList, stepsList
-    **/
+    <string name="KEY_INDEX_POSIRION">INDEX_POSITION</string>
 </resources>
