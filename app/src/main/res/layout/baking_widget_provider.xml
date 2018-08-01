@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#09C"
-    android:id="@+id/widget_baking_linear"
+    android:id="@+id/widget_baking_app"
     android:padding="@dimen/widget_margin">
 
     <FrameLayout
@@ -20,22 +20,24 @@
     </FrameLayout>
 
     <LinearLayout
+        android:id="@+id/widget_ingredients_list_ll"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
         <ListView
             android:id="@+id/widget_ingredients_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </ListView>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="#ffffff"/>
+        </RelativeLayout>
     </LinearLayout>
 
-
-    <!--<ImageView-->
-        <!--android:id="@+id/widget_baking_image"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:src="@drawable/ic_nutella_pie"/>-->
 
 </LinearLayout>

@@ -68,6 +68,8 @@ public class StepsActivity extends AppCompatActivity  {
                 bindDataPreviousStep();
             }
         });
+        int step = position + 1;
+        setTitle("Step " + step);
     }
 
     private void bindDataNextStep() {
@@ -82,7 +84,8 @@ public class StepsActivity extends AppCompatActivity  {
         args.putString(String.valueOf(R.string.KEY_VIDEO_URL),url);
         args.putString(String.valueOf(R.string.KEY_SHORT_DESCRIPTION), shortdescrip);
         args.putString(String.valueOf(R.string.KEY_DESCRIPTION), descrip);
-
+        int step = position + 1;
+        setTitle("Step " + step);
         PlayerFragment playerStepsFragment = new PlayerFragment();
         playerStepsFragment.setArguments(args);
         fragmentManager.beginTransaction().replace(R.id.activity_steps_player_container, playerStepsFragment).commit();
@@ -90,7 +93,7 @@ public class StepsActivity extends AppCompatActivity  {
     }
 
     private void bindDataPreviousStep() {
-        Toast.makeText(this, "Bind data", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Bind data", Toast.LENGTH_SHORT).show();
         position--;
         if (position == -1){
             position++;

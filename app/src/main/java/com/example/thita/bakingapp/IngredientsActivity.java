@@ -32,6 +32,7 @@ public class IngredientsActivity extends AppCompatActivity {
             fragmentManager.beginTransaction().add(R.id.ingredients_container,ingredientFragment).commit();
 
         }
+        setTitle("Ingredients");
     }
 
 }

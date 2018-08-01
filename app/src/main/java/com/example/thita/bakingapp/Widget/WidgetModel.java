@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.example.thita.bakingapp.Model.Recipe;
+import com.example.thita.bakingapp.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -22,8 +23,8 @@ public class WidgetModel {
     }
 
     public static void saveRecipe(Context context, Recipe recipe) {
-        SharedPreferences appSharedPrefs = PreferenceManager
-                .getDefaultSharedPreferences(context);
+        String name = recipe.getName();
+        SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(recipe);

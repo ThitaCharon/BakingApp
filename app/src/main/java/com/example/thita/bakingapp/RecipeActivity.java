@@ -14,6 +14,7 @@ import com.example.thita.bakingapp.Fragment.RecipeMenuFragment;
 import com.example.thita.bakingapp.Model.Ingredient;
 import com.example.thita.bakingapp.Model.Recipe;
 import com.example.thita.bakingapp.Model.Step;
+import com.example.thita.bakingapp.Widget.WidgetUpdateService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +69,7 @@ public class RecipeActivity extends AppCompatActivity implements RecipeMenuFragm
     public void recipeItemClick(Recipe recipeClicked) {
 
         if (recipeClicked != null){
+            WidgetUpdateService.startActionUpdateListView(getApplicationContext(), recipeClicked);
             List<Step> stepList = recipeClicked.getSteps();
             List<Ingredient> ingredientList = recipeClicked.getIngredients();
             Intent intentOverview = new Intent(getApplicationContext(), RecipeOverviewActivity.class);

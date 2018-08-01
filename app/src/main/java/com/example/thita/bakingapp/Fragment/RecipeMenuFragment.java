@@ -60,7 +60,7 @@ public class RecipeMenuFragment extends Fragment {
 
 
     public interface RecipeMenuFragListener {
-        public void recipeItemClick(Recipe recipeClicked);
+        void recipeItemClick(Recipe recipeClicked);
     }
 
     @Override

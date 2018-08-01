@@ -16,7 +16,7 @@ public class WidgetUpdateService extends IntentService {
     public static final String RECIPE_KEY = "target";
 
     public WidgetUpdateService() {
-        super(WidgetUpdateService.class.getName());
+        super("WidgetUpdateService");
     }
 
     @Override
@@ -25,7 +25,7 @@ public class WidgetUpdateService extends IntentService {
             final String action = intent.getAction();
             //check action order if correct the get current recipe and handleAction update listview
             if (ACTION_UPDATE_LIST_VIEW.equals(action)){
-                Recipe recipe = intent.getParcelableExtra(RECIPE_KEY);
+                Recipe recipe = intent.getParcelableExtra(String.valueOf(R.string.KEY_RECIPE));
                 handleActionUpdateListView(recipe);
             }
         }
@@ -40,14 +40,13 @@ public class WidgetUpdateService extends IntentService {
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, BakingWidgetProvider.class));
 
         BakingWidgetProvider.updateAppWidgets(this,appWidgetManager, appWidgetIds);
-
-        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_ingredients_list);
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_ingredients_list_ll);
     }
 
     public static void startActionUpdateListView(Context context, Recipe recipe) {
         Intent intent = new Intent(context, WidgetUpdateService.class);
         intent.setAction(WidgetUpdateService.ACTION_UPDATE_LIST_VIEW);
-        intent.putExtra(RECIPE_KEY, recipe);
+        intent.putExtra(String.valueOf(R.string.KEY_RECIPE), recipe);
         context.startService(intent);
     }
 }
