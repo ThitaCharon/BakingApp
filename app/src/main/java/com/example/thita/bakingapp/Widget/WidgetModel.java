@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.example.thita.bakingapp.Model.Recipe;
-import com.example.thita.bakingapp.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

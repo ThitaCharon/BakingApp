@@ -34,7 +34,7 @@ public class BakingWidgetProvider extends AppWidgetProvider {
 
         //call ListView service
         Intent intentListViewService = new Intent(context, WidgetListViewService.class);
-        views.setRemoteAdapter(R.id.widget_ingredients_list_ll,intentListViewService);
+        views.setRemoteAdapter(R.id.widget_ingredients_list,intentListViewService);
 
         // get data and respond onClick to StepActivity at first step
         Intent intentOnClick = new Intent(context, StepsActivity.class);
@@ -46,7 +46,7 @@ public class BakingWidgetProvider extends AppWidgetProvider {
         Intent appIntent = new Intent(context, RecipeOverviewActivity.class);
         PendingIntent appPendingIntent = PendingIntent.getActivity(context, 0, appIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         views.setPendingIntentTemplate(R.id.widget_ingredients_list_ll, appPendingIntent);
-        views.setEmptyView(R.id.widget_ingredients_list_ll,R.id.empty_view);
+        views.setEmptyView(R.id.widget_ingredients_list_ll, R.id.space_tv);
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }

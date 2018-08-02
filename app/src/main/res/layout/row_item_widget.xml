@@ -15,6 +15,7 @@
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:text="Whole Milk"
+            android:textColor="#ffffff"
             android:layout_weight="1"
             android:gravity="start"
             android:layout_marginLeft="8dp"/>
@@ -24,6 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
+            android:textColor="#ffffff"
             android:text="2"
             android:layout_marginRight="16dp"/>
 
@@ -31,6 +33,7 @@
             android:id="@+id/widget_ingredient_measure_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#ffffff"
             android:textSize="12sp"
             android:text="cups"
             android:gravity="end"

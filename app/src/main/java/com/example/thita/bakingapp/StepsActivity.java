@@ -2,6 +2,7 @@ package com.example.thita.bakingapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.Button;
 import android.widget.Toast;
 import com.example.thita.bakingapp.Fragment.PlayerFragment;
 import com.example.thita.bakingapp.Model.Step;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class StepsActivity extends AppCompatActivity  {
@@ -38,6 +41,7 @@ public class StepsActivity extends AppCompatActivity  {
             }
         }else{
             position = savedInstanceState.getInt(String.valueOf(R.string.KEY_INDEX_POSIRION), position);
+            stepList = savedInstanceState.getParcelableArrayList(String.valueOf(R.string.KEY_STEPS_LIST));
         }
 
         url = stepList.get(position).getVideoURL();
@@ -115,6 +119,7 @@ public class StepsActivity extends AppCompatActivity  {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(String.valueOf(R.string.KEY_INDEX_POSIRION), position);
+        outState.putParcelableArrayList(String.valueOf(R.string.KEY_STEPS_LIST), (ArrayList<? extends Parcelable>) stepList);
     }
 
 }

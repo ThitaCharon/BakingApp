@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#09C"
+    android:background="#accf19"
     android:id="@+id/widget_baking_app"
     android:padding="@dimen/widget_margin">
 
@@ -15,6 +15,7 @@
             android:layout_height="wrap_content" 
             android:textStyle="bold|italic"
             android:textSize="18sp"
+            android:textColor="#FFFFFF"
             android:layout_gravity="center"
             android:text="Recipe Name"/>
     </FrameLayout>
@@ -26,7 +27,7 @@
         android:layout_height="wrap_content">
 
         <RelativeLayout
-            android:id="@+id/empty_view"
+            android:id="@+id/space_tv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -34,8 +35,7 @@
             android:id="@+id/widget_ingredients_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textColor="#ffffff"/>
+            android:layout_centerInParent="true" />
         </RelativeLayout>
     </LinearLayout>
 
