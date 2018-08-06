@@ -5,9 +5,10 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.thita.bakingapp.Adapter.OverviewRVAdapter;
 import com.example.thita.bakingapp.Fragment.IngredientFragment;
 import com.example.thita.bakingapp.Fragment.PlayerFragment;
-import com.example.thita.bakingapp.Fragment.RecipeOverviewFragment;
+import com.example.thita.bakingapp.Fragment.OverviewFragment;
 import com.example.thita.bakingapp.Model.Ingredient;
 import com.example.thita.bakingapp.Model.Recipe;
 import com.example.thita.bakingapp.Model.Step;
@@ -15,7 +16,7 @@ import com.example.thita.bakingapp.Model.Step;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipeOverviewActivity extends AppCompatActivity implements RecipeOverviewFragment.OverviewFragListerner {
+public class OverviewActivity extends AppCompatActivity implements OverviewRVAdapter.ItemClickedListener {
 
     private Boolean mTwoPane;
     private Recipe recipe ;
@@ -23,7 +24,7 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
     public ArrayList<String> overviewList = new ArrayList<>();
     public List<Step> stepList;
     public List<Ingredient> ingredients;
-    private static final String tag = RecipeOverviewActivity.class.getSimpleName();
+    private static final String tag = OverviewActivity.class.getSimpleName();
     Bundle args = new Bundle();
 
 
@@ -44,7 +45,7 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
                 setOverview(overviewList, stepList);
                 args.putParcelableArrayList(String.valueOf(R.string.KEY_INGREDIENT_LIST), (ArrayList<? extends Parcelable>) ingredients);
                 args.putStringArrayList(String.valueOf(R.string.KEY_OVERVIEW_LIST), overviewList);
-                RecipeOverviewFragment overviewFragment = new RecipeOverviewFragment();
+                OverviewFragment overviewFragment = new OverviewFragment();
                 overviewFragment.setArguments(args);
                 mFragmentManager.beginTransaction().add(R.id.recipe_overview_container, overviewFragment).commit();
 
@@ -64,7 +65,7 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
             setOverview(overviewList, stepList);
             args.putParcelableArrayList(String.valueOf(R.string.KEY_INGREDIENT_LIST), (ArrayList<? extends Parcelable>) ingredients);
             args.putStringArrayList(String.valueOf(R.string.KEY_OVERVIEW_LIST), overviewList);
-            RecipeOverviewFragment overviewFragment = new RecipeOverviewFragment();
+            OverviewFragment overviewFragment = new OverviewFragment();
             overviewFragment.setArguments(args);
             mFragmentManager.beginTransaction().replace(R.id.recipe_overview_container, overviewFragment).commit();
 
@@ -81,7 +82,7 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
     }
 
     @Override
-    public void overviewItemClicked(int position){
+    public void onItemClicked(int position){
         if (mTwoPane){
             if(position == 0){
                 // display ingredient
@@ -128,6 +129,5 @@ public class RecipeOverviewActivity extends AppCompatActivity implements RecipeO
         outState.putParcelableArrayList(String.valueOf(R.string.KEY_STEPS_LIST), (ArrayList<? extends Parcelable>) stepList);
         outState.putParcelableArrayList(String.valueOf(R.string.KEY_INGREDIENT_LIST), (ArrayList<? extends Parcelable>) ingredients);
     }
-
 
 }

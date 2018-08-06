@@ -72,7 +72,7 @@ public class RecipeActivity extends AppCompatActivity implements RecipeMenuFragm
             WidgetUpdateService.startActionUpdateListView(getApplicationContext(), recipeClicked);
             List<Step> stepList = recipeClicked.getSteps();
             List<Ingredient> ingredientList = recipeClicked.getIngredients();
-            Intent intentOverview = new Intent(getApplicationContext(), RecipeOverviewActivity.class);
+            Intent intentOverview = new Intent(getApplicationContext(), OverviewActivity.class);
             intentOverview.putExtra(String.valueOf(R.string.KEY_RECIPE), recipeClicked);
             startActivity(intentOverview);
         }

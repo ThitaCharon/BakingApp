@@ -3,10 +3,9 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/recipe_overview_container"
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </FrameLayout>
-
+        android:layout_height="wrap_content"
+        android:id="@+id/fragment_overview_rv">
+    </android.support.v7.widget.RecyclerView>
 </LinearLayout>

@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ public class PlayerFragment extends Fragment {
     private PlayerView playerView;
     public String shortDescription;
     public String description;
+    private boolean playerWhenReady = true;
 
 
     public PlayerFragment(){}
@@ -86,6 +88,7 @@ public class PlayerFragment extends Fragment {
 
         ExoPlayer player = null;
 
+//        if (TextUtils.isEmpty(urlString)){
         if (urlString != null && !urlString.isEmpty()) {
             player = ExoPlayerFactory.newSimpleInstance(getContext(),
                     new DefaultTrackSelector());
@@ -102,6 +105,7 @@ public class PlayerFragment extends Fragment {
             player.prepare(mediaSource);
             player.setPlayWhenReady(true);
         }
+
 
         return player;
     }
@@ -170,6 +174,7 @@ public class PlayerFragment extends Fragment {
     public void onSaveInstanceState(Bundle currentState){
         super.onSaveInstanceState(currentState);
         currentState.putLong(String.valueOf(R.string.KEY_VIDEO_POSITION),currentPosition);
+        currentState.putBoolean(String.valueOf(R.string.PLAY_WHEN_REAY), playerWhenReady);
     }
 
 

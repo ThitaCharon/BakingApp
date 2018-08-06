@@ -8,11 +8,9 @@ import android.content.Intent;
 import android.os.Parcelable;
 import android.widget.RemoteViews;
 
-import com.example.thita.bakingapp.IngredientsActivity;
 import com.example.thita.bakingapp.Model.Recipe;
 import com.example.thita.bakingapp.R;
-import com.example.thita.bakingapp.RecipeActivity;
-import com.example.thita.bakingapp.RecipeOverviewActivity;
+import com.example.thita.bakingapp.OverviewActivity;
 import com.example.thita.bakingapp.StepsActivity;
 
 import java.util.ArrayList;
@@ -43,7 +41,7 @@ public class BakingWidgetProvider extends AppWidgetProvider {
         PendingIntent pendingIntent = PendingIntent.getActivity(context,0, intentOnClick, PendingIntent.FLAG_UPDATE_CURRENT);
         views.setOnClickPendingIntent(R.id.widget_baking_app, pendingIntent);
 
-        Intent appIntent = new Intent(context, RecipeOverviewActivity.class);
+        Intent appIntent = new Intent(context, OverviewActivity.class);
         PendingIntent appPendingIntent = PendingIntent.getActivity(context, 0, appIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         views.setPendingIntentTemplate(R.id.widget_ingredients_list_ll, appPendingIntent);
         views.setEmptyView(R.id.widget_ingredients_list_ll, R.id.space_tv);

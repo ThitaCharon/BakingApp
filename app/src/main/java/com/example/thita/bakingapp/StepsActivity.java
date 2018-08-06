@@ -54,9 +54,15 @@ public class StepsActivity extends AppCompatActivity  {
         PlayerFragment playerStepsFragment = new PlayerFragment();
         playerStepsFragment.setArguments(args);
 
+        /**
         if (savedInstanceState != null) {
             fragmentManager.beginTransaction().replace(R.id.activity_steps_player_container, playerStepsFragment).commit();
         }else{
+            fragmentManager.beginTransaction().add(R.id.activity_steps_player_container, playerStepsFragment).commit();
+        }
+         **/
+        // TODO on rotation savedInstanceState is not null and fragmentManger still associated with activity so retrieve current position isn Fragment
+        if (savedInstanceState == null) {
             fragmentManager.beginTransaction().add(R.id.activity_steps_player_container, playerStepsFragment).commit();
         }
 
