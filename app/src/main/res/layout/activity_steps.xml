@@ -13,6 +13,14 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"/>
       <FrameLayout
+          android:id="@+id/activity_steps_image_container"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"/>
+      <FrameLayout
+          android:id="@+id/activity_steps_thumbnailUrl_container"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"/>
+      <FrameLayout
           android:id="@+id/activity_steps_instruction_container"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"/>

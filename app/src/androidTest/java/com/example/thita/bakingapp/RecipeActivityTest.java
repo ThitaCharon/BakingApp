@@ -1,13 +1,20 @@
 package com.example.thita.bakingapp;
 
 import static android.support.test.espresso.Espresso.onData;
+import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.core.internal.deps.dagger.internal.Preconditions.checkNotNull;
+import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withResourceName;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.anything;
+import static org.hamcrest.CoreMatchers.not;
+
 import android.support.annotation.NonNull;
 import android.support.test.espresso.matcher.BoundedMatcher;
 import android.support.test.rule.ActivityTestRule;
@@ -28,12 +35,18 @@ public class RecipeActivityTest {
     @Test public void clickMenuViewItem_OpensOverviewActivity(){
 
         // TODO Perform click on menu (LISTVIEW)
+//        onView(withRecyclerView(R.id.lv_menu_fragment).atPosition(0))
+//                .check(matches(hasDescendant(withText(“Test”))));x
+        onView(withId(R.id.lv_menu_fragment)).check(matches(not(isDisplayed())));
         onData(anything()).inAdapterView(withId(R.id.lv_menu_fragment)).atPosition(0).perform(click());
+//        onView(withId(R.id.lv_menu_fragment)).check(matches(not(isDisplayed())));
+//        onData(anything()).inAdapterView(withId(R.id.lv_menu_fragment)).atPosition(0).perform(click());
         // TODO check on overview list (RecycleView) display data correctly
-//        onData(anything()).inAdapterView(allOf(withId(R.id.fragment_overview_rv),childAtPosition(0,withId(R.id.row_overview_tv)))).perform(click());
+        /*
         onData(anything())
                 .inAdapterView(allOf(withId(R.id.fragment_overview_rv), withText("Nutella Pie Ingredients"),
                         atPosition(0, withId(R.id.row_overview_tv)))).atPosition(0);
+*/
         //        onView(withId(R.id.fragment_overview_rv)).check(matches(not(isDisplayed())));
 //        onView(withId(R.id.fragment_overview_rv)).check(matches(atPosition(0,withText("Nutella Pie"))));
 

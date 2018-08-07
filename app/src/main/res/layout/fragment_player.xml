@@ -12,6 +12,11 @@
         android:layout_height="300dp"
         android:layout_weight="0"/>
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/image_thumbnail"/>
+
     <TextView
         android:id="@+id/short_description_tv"
         android:layout_width="match_parent"

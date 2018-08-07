@@ -19,6 +19,8 @@ public class StepsActivity extends AppCompatActivity  {
     private String url;
     private String shortdescrip;
     private String descrip;
+    private String image;
+    private String thumbnailUrl;
     private int position = -1;
     private List<Step> stepList;
     private Button next;
@@ -47,9 +49,12 @@ public class StepsActivity extends AppCompatActivity  {
         url = stepList.get(position).getVideoURL();
         shortdescrip = stepList.get(position).getShortDescription();
         descrip = stepList.get(position).getDescription();
+        thumbnailUrl = stepList.get(position).getThumbnailURL();
+
         args.putString(String.valueOf(R.string.KEY_VIDEO_URL),url);
         args.putString(String.valueOf(R.string.KEY_SHORT_DESCRIPTION), shortdescrip);
         args.putString(String.valueOf(R.string.KEY_DESCRIPTION), descrip);
+        args.putString(String.valueOf(R.string.KEY_THUMBNAILURL),thumbnailUrl);
 
         PlayerFragment playerStepsFragment = new PlayerFragment();
         playerStepsFragment.setArguments(args);
@@ -91,9 +96,11 @@ public class StepsActivity extends AppCompatActivity  {
         url = stepList.get(position).getVideoURL();
         shortdescrip = stepList.get(position).getShortDescription();
         descrip = stepList.get(position).getDescription();
+        thumbnailUrl = stepList.get(position).getThumbnailURL();
         args.putString(String.valueOf(R.string.KEY_VIDEO_URL),url);
         args.putString(String.valueOf(R.string.KEY_SHORT_DESCRIPTION), shortdescrip);
         args.putString(String.valueOf(R.string.KEY_DESCRIPTION), descrip);
+        args.putString(String.valueOf(R.string.KEY_THUMBNAILURL),thumbnailUrl);
         int step = position + 1;
         setTitle("Step " + step);
         PlayerFragment playerStepsFragment = new PlayerFragment();
@@ -114,6 +121,7 @@ public class StepsActivity extends AppCompatActivity  {
         args.putString(String.valueOf(R.string.KEY_VIDEO_URL),url);
         args.putString(String.valueOf(R.string.KEY_SHORT_DESCRIPTION), shortdescrip);
         args.putString(String.valueOf(R.string.KEY_DESCRIPTION), descrip);
+        args.putString(String.valueOf(R.string.KEY_THUMBNAILURL),thumbnailUrl);
 
         PlayerFragment playerStepsFragment = new PlayerFragment();
         playerStepsFragment.setArguments(args);

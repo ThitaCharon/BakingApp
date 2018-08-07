@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.thita.bakingapp.R;
@@ -19,14 +20,17 @@ import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
+import com.squareup.picasso.Picasso;
 
 public class PlayerFragment extends Fragment {
 
     public String vedioUrl;
+    public String thumbnail;
     private ExoPlayer mExoPlayer = null;
     private ExoPlayer mExoImagePlayer = null;
     private TextView shortDescriptionTV;
     private TextView descriptionTV;
+    private ImageView imageView;
     private long currentPosition = 0;
     private PlayerView playerView;
     public String shortDescription;
@@ -42,12 +46,14 @@ public class PlayerFragment extends Fragment {
         playerView = rootView.findViewById(R.id.player_pv);
         shortDescriptionTV = rootView.findViewById(R.id.short_description_tv);
         descriptionTV = rootView.findViewById(R.id.description_tv);
+        imageView = rootView.findViewById(R.id.image_thumbnail);
 
         Bundle args = getArguments();
         if (args == null){throw new AssertionError();}
         vedioUrl = getArguments().getString(String.valueOf(R.string.KEY_VIDEO_URL));
         shortDescription = getArguments().getString(String.valueOf(R.string.KEY_SHORT_DESCRIPTION));
         description = getArguments().getString(String.valueOf(R.string.KEY_DESCRIPTION));
+        thumbnail = getArguments().getString(String.valueOf(R.string.KEY_THUMBNAILURL));
 
         if (saveInstanceState != null){
             currentPosition = saveInstanceState.getLong(String.valueOf(R.string.KEY_VIDEO_POSITION));
@@ -55,6 +61,12 @@ public class PlayerFragment extends Fragment {
 
         shortDescriptionTV.setText(shortDescription);
         descriptionTV.setText(description);
+        if (thumbnail.isEmpty()) {
+            Picasso.get().load(R.drawable.no_image).into(imageView);
+        }else{
+            Picasso.get().load(thumbnail).into(imageView);
+        }
+
         if (vedioUrl != null) {
             mExoPlayer = initializePlayer(vedioUrl, playerView);
         }

@@ -19,6 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".OverviewActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.thita.bakingapp.RecipeActivity" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>

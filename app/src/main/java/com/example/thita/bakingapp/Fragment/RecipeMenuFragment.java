@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ public class RecipeMenuFragment extends Fragment {
         //inflate layout
         final View rootView = inflater.inflate(R.layout.fragment_main_menu, container,false);
         final ListView listView = rootView.findViewById(R.id.lv_menu_fragment);
+//        final RecyclerView recyclerView = rootView.findViewById(R.id.rv_menu_fragment);
 
         Bundle args = getArguments();
         if (args != null && args.containsKey(String.valueOf(R.string.KEY_RECIPE_LIST))) {
@@ -42,6 +44,7 @@ public class RecipeMenuFragment extends Fragment {
         else {
             recipeList = new ArrayList<Recipe>();
         }
+
         recipeAdapter = new RecipeAdapter(recipeList, R.layout.row_item_recipe, getContext());
         listView.setAdapter(recipeAdapter);
         recipeAdapter.notifyDataSetChanged();
