@@ -24,12 +24,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RecipeActivity extends AppCompatActivity implements RecipeMenuFragment.RecipeMenuFragListener {
+public class RecipeActivity extends AppCompatActivity implements MenuRVAdapter.ItemClickedListener {
 //    MenuRVAdapter.ItemClickedListener
 
     public List<Recipe> mRecipeList = new ArrayList<>();
     public static final String tag = RecipeActivity.class.getSimpleName();
     private android.support.v4.app.FragmentManager fragmentManager;
+    private Bundle args = new Bundle();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +54,9 @@ public class RecipeActivity extends AppCompatActivity implements RecipeMenuFragm
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
                 mRecipeList.clear();
                 mRecipeList = response.body();
-                RecipeMenuFragment menuFragment = new RecipeMenuFragment();
-                Bundle args = new Bundle();
+
                 args.putParcelableArrayList(String.valueOf(R.string.KEY_RECIPE_LIST), (ArrayList<? extends Parcelable>) mRecipeList);
+                RecipeMenuFragment menuFragment = new RecipeMenuFragment();
                 menuFragment.setArguments(args);
                 fragmentManager = getSupportFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.menu_container, menuFragment).commit();
@@ -70,9 +71,10 @@ public class RecipeActivity extends AppCompatActivity implements RecipeMenuFragm
     }
 
 
-//     public void menuItemClick(Recipe recipeClicked) {
+
     @Override
-    public void recipeItemClick(Recipe recipeClicked) {
+    public void menuItemClick(Recipe recipeClicked) {
+//    public void recipeItemClick(Recipe recipeClicked) {
         if (recipeClicked != null){
             WidgetUpdateService.startActionUpdateListView(getApplicationContext(), recipeClicked);
             List<Step> stepList = recipeClicked.getSteps();

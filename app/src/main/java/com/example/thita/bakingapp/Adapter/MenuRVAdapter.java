@@ -22,18 +22,19 @@ public class MenuRVAdapter extends RecyclerView.Adapter<MenuRVAdapter.ViewHolder
     public List<Recipe> mRecipelist;
     private Context mContext;
 
+    /*
     public MenuRVAdapter(Context context,List<Recipe> recipeList) {
         mContext = context;
         mRecipelist = recipeList;
     }
+*/
 
-    /*
     public MenuRVAdapter(Context context, ItemClickedListener listener, List<Recipe> recipeList) {
         mContext = context;
         mItemListener = listener;
         mRecipelist = recipeList;
     }
-*/
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

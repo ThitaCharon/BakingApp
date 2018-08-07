@@ -25,10 +25,10 @@ public class RecipeMenuFragment extends Fragment {
 
     private static final String tag = RecipeMenuFragment.class.getSimpleName();
     public List<Recipe> recipeList = new ArrayList<>();
-//    private RecipeAdapter recipeAdapters;
     private MenuRVAdapter recipeAdapter;
-    private RecipeMenuFragListener mCallback = null;
-    Bundle args = getArguments();
+//    private Bundle args = getArguments();
+//    private RecipeAdapter recipeAdapters;
+//    private RecipeMenuFragListener mCallback = null;
 
     //constructor
     public RecipeMenuFragment(){}
@@ -43,6 +43,7 @@ public class RecipeMenuFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_menu_rv, container,false);
         final RecyclerView mRecyclerView = rootView.findViewById(R.id.menu_rv);
 
+        Bundle args = getArguments();
         if (args != null && args.containsKey(String.valueOf(R.string.KEY_RECIPE_LIST))) {
             recipeList = args.getParcelableArrayList(String.valueOf(R.string.KEY_RECIPE_LIST));
         }
@@ -53,20 +54,10 @@ public class RecipeMenuFragment extends Fragment {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        recipeAdapter = new MenuRVAdapter(getActivity(), recipeList);
+        recipeAdapter = new MenuRVAdapter(getActivity(), (MenuRVAdapter.ItemClickedListener) getContext(),recipeList);
         mRecyclerView.setAdapter(recipeAdapter);
         mRecyclerView.setHasFixedSize(true);
         recipeAdapter.notifyDataSetChanged();
-
-        mRecyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(@NonNull AdapterView<?> parent,@NonNull View view, int position, long id) {
-                Recipe recipeSelect = (Recipe) parent.getItemAtPosition(position);
-                if (mCallback != null){
-                    mCallback.recipeItemClick(recipeSelect);
-                }else{
-                    throw new UnsupportedOperationException("Callback is currently null, this exception should not have occurred."); } }
-        });
 
         /**
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -84,7 +75,7 @@ public class RecipeMenuFragment extends Fragment {
     }
 
 
-
+/**
     public interface RecipeMenuFragListener {
         void recipeItemClick(Recipe recipeClicked);
     }
@@ -99,6 +90,6 @@ public class RecipeMenuFragment extends Fragment {
         catch (ClassCastException e) {
             throw new ClassCastException("The actual class is " + context.getClass().getName() + " but requires a RecipeMenuFragListener implementation."); }
     }
-
+**/
 
 }
