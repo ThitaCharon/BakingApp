@@ -12,19 +12,22 @@ import android.support.test.runner.AndroidJUnit4;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+
 import static android.support.test.espresso.core.internal.deps.dagger.internal.Preconditions.checkNotNull;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anything;
 import static android.support.test.espresso.action.ViewActions.click;
-
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 
 @RunWith(AndroidJUnit4.class)
 public class OverviewActivityTest {
@@ -37,12 +40,12 @@ public class OverviewActivityTest {
         onData(anything()).inAdapterView(withId(R.id.ingredients_fragment_rv)).atPosition(0).check(matches(isDisplayed()));
          **/
 
-//        onData(anything()).inAdapterView(allOf(withId(R.id.rv_overview_list),));
+//        onView(withId(R.id.fragment_overview_rv)).check(matches(isDisplayed()));
 
-//        onView(withId(R.id.fragment_overview_rv)).perform(RecyclerViewActions.scrollToPosition(3));
 
     }
 
+    /**
 
     public static Matcher<View> atPosition(final int position, @NonNull final Matcher<View> itemMatcher) {
         checkNotNull(itemMatcher);
@@ -64,6 +67,7 @@ public class OverviewActivityTest {
             }
         };
     }
+     **/
 
     // Convenience helper
     /**
@@ -92,3 +96,4 @@ public class OverviewActivityTest {
      }
     **/
 }
+

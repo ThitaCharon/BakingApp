@@ -1,21 +1,15 @@
 package com.example.thita.bakingapp.Fragment;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import com.example.thita.bakingapp.Adapter.MenuRVAdapter;
-import com.example.thita.bakingapp.Adapter.OverviewRVAdapter;
 import com.example.thita.bakingapp.Model.Recipe;
-import com.example.thita.bakingapp.Adapter.RecipeAdapter;
 import com.example.thita.bakingapp.R;
 
 import java.util.ArrayList;
@@ -41,7 +35,7 @@ public class RecipeMenuFragment extends Fragment {
 //        final View rootView = inflater.inflate(R.layout.fragment_main_menu, container,false);
 //        final ListView listView = rootView.findViewById(R.id.lv_menu_fragment);
         final View rootView = inflater.inflate(R.layout.fragment_menu_rv, container,false);
-        final RecyclerView mRecyclerView = rootView.findViewById(R.id.menu_rv);
+        final RecyclerView mRecyclerView = rootView.findViewById(R.id.fragment_menu_rv);
 
         Bundle args = getArguments();
         if (args != null && args.containsKey(String.valueOf(R.string.KEY_RECIPE_LIST))) {
