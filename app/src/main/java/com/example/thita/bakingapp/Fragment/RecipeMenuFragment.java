@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.thita.bakingapp.Adapter.MenuRVAdapter;
+import com.example.thita.bakingapp.Adapter.OverviewRVAdapter;
 import com.example.thita.bakingapp.Model.Recipe;
 import com.example.thita.bakingapp.Adapter.RecipeAdapter;
 import com.example.thita.bakingapp.R;
@@ -22,8 +24,10 @@ public class RecipeMenuFragment extends Fragment {
 
     private static final String tag = RecipeMenuFragment.class.getSimpleName();
     public List<Recipe> recipeList = new ArrayList<>();
-    private RecipeAdapter recipeAdapter;
+//    private RecipeAdapter recipeAdapters;
+    private MenuRVAdapter recipeAdapter;
     private RecipeMenuFragListener mCallback = null;
+    Bundle args = getArguments();
 
     //constructor
     public RecipeMenuFragment(){}
@@ -33,11 +37,11 @@ public class RecipeMenuFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater , ViewGroup container, Bundle saveInstanceState){
 
         //inflate layout
-        final View rootView = inflater.inflate(R.layout.fragment_main_menu, container,false);
-        final ListView listView = rootView.findViewById(R.id.lv_menu_fragment);
-//        final RecyclerView recyclerView = rootView.findViewById(R.id.rv_menu_fragment);
+//        final View rootView = inflater.inflate(R.layout.fragment_main_menu, container,false);
+//        final ListView listView = rootView.findViewById(R.id.lv_menu_fragment);
+        final View rootView = inflater.inflate(R.layout.fragment_menu_rv, container,false);
+        final RecyclerView recyclerView = rootView.findViewById(R.id.menu_rv);
 
-        Bundle args = getArguments();
         if (args != null && args.containsKey(String.valueOf(R.string.KEY_RECIPE_LIST))) {
             recipeList = args.getParcelableArrayList(String.valueOf(R.string.KEY_RECIPE_LIST));
         }
@@ -45,9 +49,11 @@ public class RecipeMenuFragment extends Fragment {
             recipeList = new ArrayList<Recipe>();
         }
 
-        recipeAdapter = new RecipeAdapter(recipeList, R.layout.row_item_recipe, getContext());
-        listView.setAdapter(recipeAdapter);
+        recipeAdapter = new MenuRVAdapter(getActivity(), (MenuRVAdapter.ItemClickedListener) getContext(), recipeList);
+        recyclerView.setAdapter(recipeAdapter);
         recipeAdapter.notifyDataSetChanged();
+
+        /**
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull AdapterView<?> parent,@NonNull View view, int position, long id) {
@@ -57,14 +63,17 @@ public class RecipeMenuFragment extends Fragment {
                 }else{
                     throw new UnsupportedOperationException("Callback is currently null, this exception should not have occurred."); } }
             });
+         **/
 
         return  rootView;
     }
 
 
+
     public interface RecipeMenuFragListener {
         void recipeItemClick(Recipe recipeClicked);
     }
+
 
     @Override
     public void onAttach(Context context) {

@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.example.thita.bakingapp.Adapter.MenuRVAdapter;
 import com.example.thita.bakingapp.Data.RecipeApi;
 import com.example.thita.bakingapp.Data.RecipeService;
 import com.example.thita.bakingapp.Fragment.RecipeMenuFragment;
@@ -23,26 +24,28 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RecipeActivity extends AppCompatActivity implements RecipeMenuFragment.RecipeMenuFragListener {
+public class RecipeActivity extends AppCompatActivity implements MenuRVAdapter.ItemClickedListener {
+//    MenuRVAdapter.ItemClickedListener
 
     public List<Recipe> mRecipeList = new ArrayList<>();
     public static final String tag = RecipeActivity.class.getSimpleName();
+    private android.support.v4.app.FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
-        if (getSupportFragmentManager().getFragments().isEmpty() ) {
 
+        if (getSupportFragmentManager().getFragments().isEmpty()) {
             RecipeMenuFragment menuFragment = new RecipeMenuFragment();
-            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .add(R.id.menu_container, menuFragment).commit();
         }
         loadDataAPI();
     }
 
-    private void loadDataAPI(){
+    private void loadDataAPI() {
         RecipeService recipyService = RecipeApi.getApi().create(RecipeService.class);
         final Call<List<Recipe>> mCall = recipyService.loadAllRecipeFromServer();
         mCall.enqueue(new Callback<List<Recipe>>() {
@@ -54,20 +57,22 @@ public class RecipeActivity extends AppCompatActivity implements RecipeMenuFragm
                 Bundle args = new Bundle();
                 args.putParcelableArrayList(String.valueOf(R.string.KEY_RECIPE_LIST), (ArrayList<? extends Parcelable>) mRecipeList);
                 menuFragment.setArguments(args);
-                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager = getSupportFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.menu_container, menuFragment).commit();
-
             }
+
             @Override
             public void onFailure(Call<List<Recipe>> call, Throwable t) {
                 Log.d(tag, "Fail callBack success");
             }
         });
+
     }
 
-    @Override
-    public void recipeItemClick(Recipe recipeClicked) {
 
+//    public void recipeItemClick(Recipe recipeClicked) {
+    @Override
+        public void menuItemClick(Recipe recipeClicked) {
         if (recipeClicked != null){
             WidgetUpdateService.startActionUpdateListView(getApplicationContext(), recipeClicked);
             List<Step> stepList = recipeClicked.getSteps();
