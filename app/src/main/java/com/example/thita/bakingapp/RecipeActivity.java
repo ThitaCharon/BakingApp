@@ -24,7 +24,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RecipeActivity extends AppCompatActivity implements MenuRVAdapter.ItemClickedListener {
+public class RecipeActivity extends AppCompatActivity implements RecipeMenuFragment.RecipeMenuFragListener {
 //    MenuRVAdapter.ItemClickedListener
 
     public List<Recipe> mRecipeList = new ArrayList<>();
@@ -70,9 +70,9 @@ public class RecipeActivity extends AppCompatActivity implements MenuRVAdapter.I
     }
 
 
-//    public void recipeItemClick(Recipe recipeClicked) {
+//     public void menuItemClick(Recipe recipeClicked) {
     @Override
-        public void menuItemClick(Recipe recipeClicked) {
+    public void recipeItemClick(Recipe recipeClicked) {
         if (recipeClicked != null){
             WidgetUpdateService.startActionUpdateListView(getApplicationContext(), recipeClicked);
             List<Step> stepList = recipeClicked.getSteps();
