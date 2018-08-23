@@ -35,6 +35,8 @@ public class StepsActivity extends AppCompatActivity  {
         next = (Button) findViewById(R.id.next_btn);
         back = (Button) findViewById(R.id.back_btn);
 
+        if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         Intent intent = getIntent();
         if (savedInstanceState == null) {
             if (intent != null) {
@@ -129,6 +131,7 @@ public class StepsActivity extends AppCompatActivity  {
 
     }
 
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -136,4 +139,9 @@ public class StepsActivity extends AppCompatActivity  {
         outState.putParcelableArrayList(String.valueOf(R.string.KEY_STEPS_LIST), (ArrayList<? extends Parcelable>) stepList);
     }
 
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
+    }
 }

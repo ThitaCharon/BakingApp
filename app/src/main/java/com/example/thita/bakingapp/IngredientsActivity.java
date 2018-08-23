@@ -21,6 +21,8 @@ public class IngredientsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingredients);
 
+        if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         Intent intent = getIntent();
         if (intent != null){
             ingredientList = intent.getParcelableArrayListExtra(String.valueOf(R.string.KEY_INGREDIENT_LIST));
@@ -33,6 +35,12 @@ public class IngredientsActivity extends AppCompatActivity {
 
         }
         setTitle("Ingredients");
+    }
+
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 
 }

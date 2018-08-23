@@ -1,7 +1,9 @@
 package com.example.thita.bakingapp;
 
+import android.support.test.espresso.contrib.RecyclerViewActions;
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.core.internal.deps.dagger.internal.Preconditions.checkNotNull;
@@ -33,16 +35,20 @@ public class RecipeActivityTest {
 
     @Rule public ActivityTestRule<RecipeActivity> mActivityTestRule = new ActivityTestRule<>(RecipeActivity.class);
 
+
     @Test public void clickMenuViewItem_OpensOverviewActivity(){
 
-        // TODO Perform click on RV
-        onView(withId(R.id.fragment_menu_rv)).check(matches(isDisplayed()));
-        onView(withId(R.id.fragment_menu_rv)).check(matches(atPosition(0, hasDescendant(withText("Nutella Pie")))));
+    //  TODO Perform click on RV
+        onView((withId(R.id.fragment_menu_rv))).check(matches(isDisplayed()));
+        onView(withId(R.id.fragment_menu_rv)).perform(RecyclerViewActions.actionOnItemAtPosition(3, click()));
+        onView(withId(R.id.menu_tv)).check(matches(withText("Cheesecake"))).check(matches(isDisplayed()));
+        //        onView(withText(R.id.fragment_menu_rv)).check(matches(hasDescendant(withText("Nutella Pie"))));
 
         //TODO can not pass testing on other position
 //        onView(withId(R.id.fragment_menu_rv)).check(matches(atPosition(1, hasDescendant(withText("Brownies")))));
 //        onView(withId(R.id.fragment_menu_rv)).check(matches(atPosition(2, hasDescendant(withText("Yellow Cake")))));
 //        onView(withId(R.id.fragment_menu_rv)).check(matches(atPosition(3, hasDescendant(withText("Cheesecake")))));
+//        onView(withText(R.id.menu_tv)).check(matches(hasDescendant(withText("Nutella Pie"))));
 
     }
 
@@ -67,36 +73,5 @@ public class RecipeActivityTest {
             }
         };
     }
-
-    /**
-    private static Matcher<View> childAtPosition(final int position, final Matcher<View> parentMatcher) {
-
-        return new TypeSafeMatcher<View>() {
-            @Override
-            public void describeTo(Description description) {
-                description.appendText("Child at position " + position + " in parent ");
-                parentMatcher.describeTo(description);
-            }
-
-            @Override
-            public boolean matchesSafely(View view) {
-                ViewParent parent = view.getParent();
-                return parent instanceof ViewGroup && parentMatcher.matches(parent)
-                        && view.equals(((ViewGroup) parent).getChildAt(position));
-            }
-        };
-    }
-     **/
-
-    /**
-    @Test // clicked on the proper recipe
-    public void clickMenuViewItem_OpensOverviewActivity() {
-        //1.Find the View
-        //2.Perform action
-        onData(anything()).inAdapterView(withId(R.id.lv_menu_fragment)).atPosition(0).perform(click());
-        //3.Check expected result
-        onData(anything()).inAdapterView(withId(R.id.fragment_overview_rv)).atPosition(0).check(matches(isDisplayed()));
-    }
-    **/
 
 }
